@@ -145,7 +145,7 @@
       justify-content: center;
     }
     .skill-item {
-      background: rgba(255,255,255,0.05);
+      background: rgba(20, 20, 20, 0.65); /* Darker and more visible */
       border-radius: 6px;
       padding: 0.5rem 1.1rem;
       font-size: 1rem;
@@ -157,8 +157,8 @@
       justify-content: center;
       gap: 0.4rem;
       min-width: 120px;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       user-select: none;
       font-weight: 500;
       text-align: center;
@@ -292,7 +292,7 @@
 
   <header>
     <nav>
-      <div class="nav-logo">
+      <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
         <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
         Vittesh Raghavan
       </div>
@@ -307,7 +307,6 @@
           <ul class="social-links">
             <li><a href="https://www.youtube.com/@vittesh9933" target="_blank" aria-label="YouTube"><img src="img/youtube.png" alt="YouTube"></a></li>
             <li><a href="https://www.linkedin.com/in/vittesh-raghavan-546397225/" target="_blank" aria-label="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn"></a></li>
-            <li><a href="https://vitteshraghavan.com" target="_blank" aria-label="Portfolio"><i class="fas fa-globe" aria-hidden="true"></i></a></li>
           </ul>
           <a href="resume.pdf" target="_blank" class="resume-link">Resume</a>
         </div>
@@ -324,7 +323,7 @@
     <section id="projects">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <div class="project-card" onclick="window.open('project1.html', '_blank')">
+        <div class="project-card" onclick="window.location.href='project1.html'">
           <div class="video-container">
             <video class="project-video" src="video/portfolio.mp4" autoplay muted loop></video>
             <div class="card-desc">
@@ -334,7 +333,7 @@
           </div>
           <div class="card-title">Overview</div>
         </div>
-        <div class="project-card" onclick="window.open('project2.html', '_blank')">
+        <div class="project-card" onclick="window.location.href='project2.html'">
           <div class="video-container">
             <video class="project-video" src="video/losingit.mp4" autoplay muted loop></video>
             <div class="card-desc">
@@ -344,7 +343,7 @@
           </div>
           <div class="card-title">Losing It</div>
         </div>
-        <div class="project-card" onclick="window.open('project3.html', '_blank')">
+        <div class="project-card" onclick="window.location.href='project3.html'">
           <div class="video-container">
             <video class="project-video" src="video/uefn.mp4" autoplay muted loop></video>
             <div class="card-desc">
@@ -354,7 +353,7 @@
           </div>
           <div class="card-title">UEFN Gamejam</div>
         </div>
-        <div class="project-card" onclick="window.open('project4.html', '_blank')">
+        <div class="project-card" onclick="window.location.href='project4.html'">
           <div class="video-container">
             <video class="project-video" src="video/hooked.mp4" autoplay muted loop></video>
             <div class="card-desc">
@@ -439,6 +438,17 @@
         // Mark as visited so animation doesn't play again
         sessionStorage.setItem('visitedMain', 'true');
       }, 2100);
+    });
+
+    // Make logo+text clickable to go to main page if not already there
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLogo = document.getElementById('nav-logo-clickable');
+      // Only add click if not on main page (index.html or /)
+      if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && window.location.pathname !== '/portfolio/Website/') {
+        navLogo.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
     });
   </script>
 </body>

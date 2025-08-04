@@ -73,7 +73,7 @@
 
   <header>
     <nav>
-      <div class="nav-logo">
+      <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
         <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
         Vittesh Raghavan
       </div>
@@ -88,7 +88,6 @@
           <ul class="social-links">
             <li><a href="https://www.youtube.com/@vittesh9933" target="_blank" aria-label="YouTube"><img src="img/youtube.png" alt="YouTube"></a></li>
             <li><a href="https://www.linkedin.com/in/vittesh-raghavan-546397225/" target="_blank" aria-label="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn"></a></li>
-            <li><a href="https://vitteshraghavan.com" target="_blank" aria-label="Portfolio"><i class="fas fa-globe" aria-hidden="true"></i></a></li>
           </ul>
           <a href="resume.pdf" target="_blank" class="resume-link">Resume</a>
         </div>
@@ -135,5 +134,13 @@
   </main>
 
   <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLogo = document.getElementById('nav-logo-clickable');
+      navLogo.addEventListener('click', () => {
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
 </body>
 </html>
