@@ -250,6 +250,22 @@
       margin-left: 0.5rem;
       white-space: nowrap;
     }
+    #progress-bar-container {
+      width: 180px;
+      height: 6px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 3px;
+      margin: 2.2rem auto 0 auto;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd700 0%, #fff 100%);
+      border-radius: 3px;
+      transition: width 0.3s cubic-bezier(.4,2,.6,1);
+    }
     .logo-pop {
       opacity: 1 !important;
       transform: scale(1) !important;
@@ -282,6 +298,9 @@
     <div id="logo-anim-center">
       <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" id="logo-anim-img">
       <span id="logo-anim-text">Vittesh Raghavan</span>
+    </div>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
     </div>
   </div>
 
@@ -404,6 +423,14 @@
       const overlay = document.getElementById('logo-animation-overlay');
       const logoImg = document.getElementById('logo-anim-img');
       const logoText = document.getElementById('logo-anim-text');
+      const progressBar = document.getElementById('progress-bar');
+      const progressBarContainer = document.getElementById('progress-bar-container');
+
+      // Hide progress bar initially
+      progressBarContainer.style.display = 'none';
+
+      // Animation duration (logo+text) in ms
+      const ANIMATION_DURATION = 1300;
 
       // If coming from a project page, set visitedMain before leaving (see note below)
       // Check if we should skip animation (set in sessionStorage)
@@ -432,12 +459,95 @@
         logoImg.classList.add('logo-nudge-left');
       }, 900);
 
-      // Hide overlay after animation
+      // --- Progress Bar Logic ---
+      // List of assets to wait for: all videos + Font Awesome CSS
+      const videos = Array.from(document.querySelectorAll('video'));
+      const fontAwesome = document.querySelector('link[href*="font-awesome"],link[href*="fontawesome"],link[href*="font-awesome"]') ||
+                          document.querySelector('link[href*="fontawesome"]');
+      let loaded = 0;
+      const total = videos.length + 1; // +1 for Font Awesome
+
+      function updateProgress() {
+        const percent = Math.round((loaded / total) * 100);
+        progressBar.style.width = percent + '%';
+      }
+
+      // Font Awesome CSS load
+      if (fontAwesome) {
+        if (fontAwesome.sheet) {
+          loaded++;
+          updateProgress();
+        } else {
+          fontAwesome.addEventListener('load', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          });
+          fontAwesome.addEventListener('error', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          });
+        }
+      } else {
+        // If not found, count as loaded
+        loaded++;
+        updateProgress();
+      }
+
+      // Video load events
+      videos.forEach(video => {
+        if (video.readyState >= 3) {
+          loaded++;
+          updateProgress();
+        } else {
+          video.addEventListener('loadeddata', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          }, { once: true });
+          video.addEventListener('error', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          }, { once: true });
+        }
+      });
+
+      // In case all videos are already loaded
+      updateProgress();
+
+      let animationDone = false;
+      let assetsLoaded = false;
+
+      // After animation duration, check if assets are loaded
       setTimeout(() => {
-        overlay.classList.add('hide');
-        // Mark as visited so animation doesn't play again
-        sessionStorage.setItem('visitedMain', 'true');
-      }, 2100);
+        animationDone = true;
+        if (loaded >= total) {
+          hideOverlay();
+        } else {
+          // Show progress bar if not already loaded
+          progressBarContainer.style.display = 'block';
+        }
+      }, ANIMATION_DURATION);
+
+      function checkAllLoaded() {
+        if (loaded >= total) {
+          assetsLoaded = true;
+          if (animationDone) {
+            hideOverlay();
+          }
+        }
+      }
+
+      function hideOverlay() {
+        setTimeout(() => {
+          overlay.classList.add('hide');
+          sessionStorage.setItem('visitedMain', 'true');
+        }, 400); // Small delay for smoothness
+      }
+
+      checkAllLoaded();
     });
 
     // Make logo+text clickable to go to main page if not already there
