@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vittesh Raghavan – Game Designer</title>
+  <meta name="description" content="Portfolio of Vittesh Raghavan, a game designer specializing in narrative-driven experiences, level design, and systems design.">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p8f4R2wkAs3Vq5Yvqt3E6Z5VJKYWLW5J3nYl6FJ2GTlPMgPbxQqY0e4Kf8K0s5cZ+akd4XGvnZV0szoY4I8C1g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
@@ -52,20 +53,238 @@
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.25);
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(.25,.8,.25,1), box-shadow 0.25s;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: stretch;
     }
-    .project-video { width: 100%; display: block; }
-    .project-card .card-content { padding: 1rem; }
+    .project-card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+      z-index: 2;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      display: flex;
+    }
+    .project-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #222;
+      display: block;
+      pointer-events: none;
+    }
+    .card-title {
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 1rem 0 1rem 0;
+      transition: opacity 0.2s;
+      z-index: 1;
+      position: static;
+      border-radius: 0 0 8px 8px;
+    }
+    .card-desc {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(20,20,20,0.92);
+      color: #fff;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 2rem 1.5rem 1rem 1.5rem;
+      font-size: 1rem;
+      transition: opacity 0.25s;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .desc-heading {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      text-align: left;
+    }
+    .desc-text {
+      text-align: left;
+    }
+    .project-card:hover .card-desc {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .project-card:hover .card-title {
+      opacity: 0.2;
+    }
+    .project-card .card-content { display: none; }
     .project-card h3 { margin-bottom: .5rem; font-size: 1.25rem; color: #fff; }
     .project-card p { color: #eee; }
 
     footer { text-align: center; padding: 2rem 0; font-size: .875rem; color: #ccc; }
 
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+    .skill-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 0.5rem 1.1rem;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-width: 120px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      user-select: none;
+      font-weight: 500;
+      text-align: center;
+    }
+    .skill-item i {
+      font-size: 1.4rem;
+      opacity: 0.85;
+    }
+    .skill-item span {
+      display: block;
+      text-align: center;
+    }
+
+    .contact-cards { display: none; }
+    .contact-email {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+      font-size: 1.1rem;
+      color: #fff;
+      justify-content: center;
+    }
+    .contact-email i {
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .contact-email a {
+      color: #fff;
+      font-size: 1.1rem;
+      word-break: break-all;
+      transition: color 0.2s;
+    }
+    .contact-email a:hover {
+      color: #ffd700;
+    }
+    @media (max-width: 700px) {
+      .skills-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      .skill-item {
+        min-width: unset;
+        width: 100%;
+        max-width: 300px;
+      }
+    }
     @media(max-width: 600px) {
       .nav-links, .social-container { display: none; }
+      .project-video { height: 140px; }
+    }
+
+    /* Logo Animation Overlay Styles */
+    #logo-animation-overlay {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s cubic-bezier(.4,2,.6,1), visibility 0.6s;
+      flex-direction: column;
+    }
+    #logo-anim-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      position: relative;
+    }
+    #logo-anim-img {
+      width: 120px;
+      height: 85px;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.4s, transform 0.4s cubic-bezier(.4,2,.6,1), margin-left 0.5s;
+      z-index: 2;
+    }
+    #logo-anim-text {
+      color: #fff;
+      font-size: 2.2rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.4s, transform 0.6s cubic-bezier(.4,2,.6,1);
+      z-index: 2;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+    }
+    .logo-pop {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .logo-nudge-left {
+      animation: logoNudgeLeft 0.7s forwards cubic-bezier(.4,2,.6,1);
+    }
+    .text-slide-right {
+      animation: textSlideRight 0.7s forwards cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes logoNudgeLeft {
+      from { transform: scale(1) translateX(0); }
+      to { transform: scale(1) translateX(-32px); }
+    }
+    @keyframes textSlideRight {
+      from { opacity: 0; transform: translateX(-60px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    #logo-animation-overlay.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.6s, visibility 0.6s;
     }
   </style>
 </head>
 <body>
+  <!-- Logo Animation Overlay -->
+  <div id="logo-animation-overlay">
+    <div id="logo-anim-center">
+      <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" id="logo-anim-img">
+      <span id="logo-anim-text">Vittesh Raghavan</span>
+    </div>
+  </div>
+
   <video autoplay muted loop id="bg-video">
     <source src="video/animated_bg.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -74,7 +293,7 @@
   <header>
     <nav>
       <div class="nav-logo">
-        <img src="img/vrlogo.png" alt="Logo" class="logo-img">
+        <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
         Vittesh Raghavan
       </div>
       <div class="nav-row">
@@ -88,7 +307,7 @@
           <ul class="social-links">
             <li><a href="https://www.youtube.com/@vittesh9933" target="_blank" aria-label="YouTube"><img src="img/youtube.png" alt="YouTube"></a></li>
             <li><a href="https://www.linkedin.com/in/vittesh-raghavan-546397225/" target="_blank" aria-label="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn"></a></li>
-            <li><a href="https://vitteshraghavan.com" target="_blank" aria-label="Portfolio"><i class="fas fa-globe"></i></a></li>
+            <li><a href="https://vitteshraghavan.com" target="_blank" aria-label="Portfolio"><i class="fas fa-globe" aria-hidden="true"></i></a></li>
           </ul>
           <a href="resume.pdf" target="_blank" class="resume-link">Resume</a>
         </div>
@@ -105,39 +324,123 @@
     <section id="projects">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <div class="project-card">
-          <video class="project-video" src="video/portfolio.mp4" autoplay muted loop></video>
-          <div class="card-content"><h3>Overview</h3></div>
+        <div class="project-card" onclick="window.open('project1.html', '_blank')">
+          <div class="video-container">
+            <video class="project-video" src="video/portfolio.mp4" autoplay muted loop></video>
+            <div class="card-desc">
+              <div class="desc-heading">Personal Project</div>
+              <div class="desc-text">A showcase of my portfolio, featuring highlights of my best work and a summary of my design philosophy and approach.</div>
+            </div>
+          </div>
+          <div class="card-title">Overview</div>
         </div>
-        <div class="project-card">
-          <video class="project-video" src="video/losingit.mp4" autoplay muted loop></video>
-          <div class="card-content"><h3>Losing It</h3><p>A surreal horror game where players race to escape their nightmare and return to their sleeping body before the shadow catches them.</p></div>
+        <div class="project-card" onclick="window.open('project2.html', '_blank')">
+          <div class="video-container">
+            <video class="project-video" src="video/losingit.mp4" autoplay muted loop></video>
+            <div class="card-desc">
+              <div class="desc-heading">Personal Project</div>
+              <div class="desc-text">A surreal horror game where players race to escape their nightmare and return to their sleeping body before the shadow catches them. Features atmospheric design and psychological tension.</div>
+            </div>
+          </div>
+          <div class="card-title">Losing It</div>
         </div>
-        <div class="project-card">
-          <video class="project-video" src="video/uefn.mp4" autoplay muted loop></video>
-          <div class="card-content"><h3>UEFN Gamejam</h3><p>A 2-player co-op game where communication and teamwork are key. Each player takes on a unique role—one as a sniper, the other as a runner. Players must coordinate to solve dynamic puzzles, overcome obstacles, and defeat enemies across a series of interconnected levels. Progress requires constant collaboration, with each challenge designed to test timing, trust, and tactical communication. Success depends not just on skill, but on how well you work together.</p></div>
+        <div class="project-card" onclick="window.open('project3.html', '_blank')">
+          <div class="video-container">
+            <video class="project-video" src="video/uefn.mp4" autoplay muted loop></video>
+            <div class="card-desc">
+              <div class="desc-heading">Personal Project</div>
+              <div class="desc-text">A 2-player co-op game where communication and teamwork are key. Each player takes on a unique role—one as a sniper, the other as a runner. Solve dynamic puzzles and defeat enemies together.</div>
+            </div>
+          </div>
+          <div class="card-title">UEFN Gamejam</div>
         </div>
-        <div class="project-card">
-          <video class="project-video" src="video/hooked.mp4" autoplay muted loop></video>
-          <div class="card-content"><h3>Hooked</h3><p>A casual game with core mechanics like casting, catching, inventory, and shopkeeping. Designed for satisfying loop-based gameplay and UI-driven interaction.</p></div>
+        <div class="project-card" onclick="window.open('project4.html', '_blank')">
+          <div class="video-container">
+            <video class="project-video" src="video/hooked.mp4" autoplay muted loop></video>
+            <div class="card-desc">
+              <div class="desc-heading">Personal Project</div>
+              <div class="desc-text">A casual game with core mechanics like casting, catching, inventory, and shopkeeping. Designed for satisfying loop-based gameplay and UI-driven interaction.</div>
+            </div>
+          </div>
+          <div class="card-title">Hooked</div>
         </div>
       </div>
     </section>
 
     <section id="skills">
       <h2>Skills</h2>
-      <ul><li>Unity</li><li>Unreal 5.0</li><li>UEFN</li><li>Blender</li><li>Jira</li><li>Confluence</li><li>C++</li><li>C#</li><li>Python</li><li>Premiere Pro</li><li>After Effects</li><li>Photoshop</li><li>Adobe Audition</li></ul>
+      <div class="skills-grid">
+        <div class="skill-item"><i class="fab fa-unity"></i><span>Unity</span></div>
+        <div class="skill-item"><i class="fas fa-cube"></i><span>Unreal 5.0</span></div>
+        <div class="skill-item"><i class="fas fa-cubes"></i><span>UEFN</span></div>
+        <div class="skill-item"><i class="fas fa-cube"></i><span>Blender</span></div>
+        <div class="skill-item"><i class="fas fa-tasks"></i><span>Jira</span></div>
+        <div class="skill-item"><i class="fas fa-book"></i><span>Confluence</span></div>
+        <div class="skill-item"><i class="fas fa-code"></i><span>C++</span></div>
+        <div class="skill-item"><i class="fas fa-code"></i><span>C#</span></div>
+        <div class="skill-item"><i class="fab fa-python"></i><span>Python</span></div>
+        <div class="skill-item"><i class="fas fa-film"></i><span>Premiere Pro</span></div>
+        <div class="skill-item"><i class="fas fa-magic"></i><span>After Effects</span></div>
+        <div class="skill-item"><i class="fas fa-image"></i><span>Photoshop</span></div>
+        <div class="skill-item"><i class="fas fa-microphone"></i><span>Adobe Audition</span></div>
+      </div>
     </section>
 
     <section id="contact">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:vitteshraghavan@gmail.com">vitteshraghavan@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/vittesh-raghavan-546397225/" target="_blank">vittesh-raghavan-546397225</a></p>
-      <p>Location: Winter Park, Florida</p>
+      <div class="contact-email">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:vitteshraghavan@gmail.com">vitteshraghavan@gmail.com</a>
+      </div>
     </section>
   </main>
 
   <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Always scroll to top on load (prevents landing in the middle after coming from a project page)
+      window.scrollTo(0, 0);
+
+      const overlay = document.getElementById('logo-animation-overlay');
+      const logoImg = document.getElementById('logo-anim-img');
+      const logoText = document.getElementById('logo-anim-text');
+
+      // If coming from a project page, set visitedMain before leaving (see note below)
+      // Check if we should skip animation (set in sessionStorage)
+      if (sessionStorage.getItem('visitedMain')) {
+        overlay.style.display = 'none'; // Instantly hide overlay, no flash
+        logoImg.style.opacity = '1';
+        logoText.style.opacity = '1';
+        logoText.style.transform = 'translateX(0)';
+        return;
+      }
+
+      // Hide text initially
+      logoText.style.opacity = '0';
+      logoText.style.transform = 'translateX(-60px)';
+      logoImg.style.opacity = '0';
+
+      // Pop in logo only
+      setTimeout(() => {
+        logoImg.classList.add('logo-pop');
+      }, 100);
+
+      // Animate text sliding out from logo, and logo nudges left
+      setTimeout(() => {
+        logoText.style.opacity = '1';
+        logoText.classList.add('text-slide-right');
+        logoImg.classList.add('logo-nudge-left');
+      }, 900);
+
+      // Hide overlay after animation
+      setTimeout(() => {
+        overlay.classList.add('hide');
+        // Mark as visited so animation doesn't play again
+        sessionStorage.setItem('visitedMain', 'true');
+      }, 2100);
+    });
+  </script>
 </body>
 </html>
 
