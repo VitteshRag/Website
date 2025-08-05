@@ -7,19 +7,108 @@
   <meta name="description" content="Showcase of 3D models, animations, and video edits by Vittesh Raghavan.">
   <link rel="stylesheet" href="fontawesome/css/all.min.css">
   <style>
-    body { font-family: Arial, sans-serif; background: #000; color: #fff; margin: 0; }
-    #bg-video { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; pointer-events: none; user-select: none; touch-action: none; -webkit-user-drag: none; }
-    header { background: rgba(0,0,0,0.7); position: sticky; top: 0; z-index: 100; }
-    nav { display: flex; flex-direction: column; align-items: center; padding: 1rem; max-width: 960px; margin: 0 auto; }
-    .nav-logo { display: flex; align-items: center; font-weight: bold; font-size: 2rem; color: #fff; margin-bottom: 0.5rem; text-align: center; cursor: pointer; }
-    .logo-img { width: 3.5rem; height: 2.5rem; margin-right: 0.5rem; }
-    .nav-row { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; }
-    .nav-links { list-style: none; display: flex; gap: 2rem; }
-    .nav-links li { font-size: 1rem; position: relative; }
-    .nav-links a { color: #fff; transition: color 0.2s; }
-    .nav-links a:hover { color: #ffd700; }
-    .dropdown { position: relative; display: inline-block; }
-    .dropdown .dropbtn { cursor: pointer; font-family: inherit; font-weight: 500; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #fff; overflow-x: hidden; position: relative; background: #000; }
+    a { text-decoration: none; color: inherit; }
+
+    #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+
+    header {
+      background: rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100vw;
+      left: 0;
+    }
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      padding: 0.7rem 2.2rem;
+      position: relative;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      margin-right: 0;
+      text-align: left;
+      transition: opacity 0.3s;
+      flex: 0 0 auto;
+    }
+    .logo-img {
+      width: 4.2rem;
+      height: 3rem;
+      margin-right: 0.7rem;
+    }
+    .nav-logo-text {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.04em;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+      flex: 1 1 auto;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li {
+      position: relative;
+    }
+    .nav-links a, .dropbtn {
+      color: #fff;
+      font-size: 1.18rem;
+      font-weight: 700;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      transition: color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a:hover, .dropbtn:hover {
+      color: #ffd700;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown .dropbtn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: inherit;
+      font-weight: 500;
+      color: #fff;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
     .dropdown-content {
       display: none;
       position: absolute;
@@ -68,13 +157,73 @@
       background: #181818;
       color: #ffd700;
     }
-    .social-container { display: flex; align-items: center; gap: 1rem; position: absolute; right: 0; }
-    .social-links { list-style: none; display: flex; gap: 1rem; }
-    .social-links a { display: inline-block; transition: transform 0.2s; }
-    .social-links img, .social-links i { width: 2rem; height: 2rem; font-size: 2rem; }
-    .social-links a:hover { transform: scale(1.2); }
-    .resume-link { font-size: 1rem; padding: 0.5rem 1rem; border: 1px solid #fff; border-radius: 4px; transition: background 0.2s, color 0.2s; white-space: nowrap; }
-    .resume-link:hover { background: #fff; color: #000; }
+
+    .social-container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: static;
+      flex: 0 0 auto;
+    }
+    .social-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .social-links a {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .social-links img, .social-links i {
+      width: 3.2rem;
+      height: 3.2rem;
+      font-size: 3.2rem;
+    }
+    .social-links a:hover {
+      transform: scale(1.25);
+    }
+    .resume-link {
+      font-size: 1.18rem;
+      padding: 0.7rem 1.3rem;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+    .resume-link:hover {
+      background: #fff;
+      color: #000;
+    }
+    @media (min-width: 700px) {
+      .nav-logo-text.hide-on-scroll {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+    @media (max-width: 900px) {
+      .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.7rem 1rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+      .social-container {
+        margin-top: 0.7rem;
+        justify-content: flex-end;
+      }
+    }
+    @media (max-width: 700px) {
+      .nav-links { flex-direction: column; gap: 1rem; }
+      .dropdown-content { left: 0; right: auto; min-width: 160px; padding: 0.7rem; }
+      main { padding: 0 0.3rem; }
+    }
+    @media(max-width: 600px) {
+      .nav-links, .social-container { display: none; }
+    }
+
     main { max-width: 1100px; margin: 2.5rem auto 2rem auto; padding: 0 1.5rem; }
     .showcase-section {
       background: rgba(20,20,20,0.82);
@@ -136,15 +285,8 @@
       .showcase-grid { gap: 1.2rem; }
       .showcase-card { width: 100%; }
     }
-    @media (max-width: 700px) {
-      .nav-links { flex-direction: column; gap: 1rem; }
-      .dropdown-content { left: 0; right: auto; min-width: 160px; padding: 0.7rem; }
-      main { padding: 0 0.3rem; }
-    }
-    @media(max-width: 600px) {
-      .nav-links, .social-container { display: none; }
-    }
   </style>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 <body>
   <video autoplay muted loop id="bg-video" tabindex="-1" aria-hidden="true">
@@ -153,14 +295,14 @@
   </video>
   <header>
     <nav>
-      <div class="nav-logo" id="nav-logo-clickable">
-        <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
-        Vittesh Raghavan
-      </div>
-      <div class="nav-row">
-        <ul class="nav-links" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">
+      <div class="nav-bar">
+        <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
+          <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
+          <span class="nav-logo-text">Vittesh Raghavan</span>
+        </div>
+        <ul class="nav-links">
           <li class="dropdown">
-            <span class="dropbtn" style="font-family: inherit; font-weight: 500; cursor:pointer;">Projects</span>
+            <span class="dropbtn">PROJECTS</span>
             <div class="dropdown-content">
               <div class="dropdown-section">
                 <div class="dropdown-heading">Team Projects</div>
@@ -180,9 +322,9 @@
               </div>
             </div>
           </li>
-          <li><a href="showcase.html" style="font-family: inherit; font-weight: 500;">Showcase</a></li>
-          <li><a href="about.html" style="font-family: inherit; font-weight: 500;">About</a></li>
-          <li><a href="index.html#contact" style="font-family: inherit; font-weight: 500;">Contact</a></li>
+          <li><a href="showcase.html">SHOWCASE</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="#contact">CONTACT</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -197,27 +339,67 @@
   <main>
     <section class="showcase-section">
       <div class="showcase-title">Showcase: 3D Models, Animations & Video Edits</div>
-      <div class="showcase-grid">
-        <!-- Example 3D Model -->
-        <div class="showcase-card">
-          <img src="img/3dmodel_sample.jpg" alt="3D Model Example">
-          <div class="showcase-card-title">3D Model Example</div>
-          <div class="showcase-card-desc">A sample 3D model created in Blender. (Replace with your own work!)</div>
-        </div>
-        <!-- Example Animation -->
-        <div class="showcase-card">
-          <video src="video/animation_sample.mp4" controls poster="img/animation_thumb.jpg"></video>
-          <div class="showcase-card-title">Animation Example</div>
-          <div class="showcase-card-desc">Short animation sequence demonstrating character rigging and motion.</div>
-        </div>
-        <!-- Example Video Edit -->
-        <div class="showcase-card">
-          <video src="video/edit_sample.mp4" controls poster="img/edit_thumb.jpg"></video>
-          <div class="showcase-card-title">Video Edit Example</div>
-          <div class="showcase-card-desc">Freelance video edit for a client, showcasing transitions and effects.</div>
-        </div>
-        <!-- Add more cards as needed -->
+      
+      <!-- Large 16:9 Image Centered -->
+      <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2.5rem;">
+        <img src="img/large1.png" alt="Large Showcase Image" style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
       </div>
+      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Large Image Title</div>
+
+      <!-- Row: 2 Model Boxes Side by Side -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;justify-items:center;align-items:start;margin-bottom:2.5rem;">
+        <div class="showcase-card" style="background:#222;width:100%;max-width:420px;">
+          <model-viewer src="models/cat.glb" alt="Interactable 3D Model"
+            camera-controls touch-action="pan-y" auto-rotate ar
+            style="width:100%;height:350px;background:#222;border-radius:8px;display:block;"
+            id="cat-model-viewer">
+            <div style="color:#ffd700;text-align:center;padding:1.2em;">
+              Your browser does not support interactive 3D models.<br>
+              <a href="models/cat.glb" style="color:#ffd700;text-decoration:underline;">Download model</a>
+            </div>
+          </model-viewer>
+          <div class="showcase-card-title" style="margin-top:1rem;">Interactable 3D Model</div>
+        </div>
+        <div class="showcase-card" style="background:#222;width:100%;max-width:420px;">
+          <model-viewer src="models/test.glb" alt="Test 3D Model"
+            camera-controls auto-rotate
+            style="width:100%;height:350px;background:#222;border-radius:8px;display:block;"
+            id="test-model-viewer">
+            <div style="color:#ffd700;text-align:center;padding:1.2em;">
+              Your browser does not support interactive 3D models.<br>
+              <a href="models/test.glb" style="color:#ffd700;text-decoration:underline;">Download model</a>
+            </div>
+          </model-viewer>
+          <div class="showcase-card-title" style="margin-top:1rem;">Test 3D Model</div>
+        </div>
+      </div>
+
+      <!-- Large 16:9 Image Centered -->
+      <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2.5rem;">
+        <img src="img/large2.png" alt="Second Large Showcase Image" style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+      </div>
+      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Second Large Image Title</div>
+
+      <!-- Row: 2 Vertical 9:16 Videos Side by Side -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;justify-items:center;align-items:start;margin-bottom:2.5rem;">
+        <div class="showcase-card" style="background:#222;width:100%;max-width:320px;">
+          <video src="video/vertical1.mp4" controls poster="img/vertical1_thumb.jpg"
+            style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#222;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
+          <div class="showcase-card-title" style="margin-top:1rem;">Vertical Video 1 Title</div>
+        </div>
+        <div class="showcase-card" style="background:#222;width:100%;max-width:320px;">
+          <video src="video/vertical2.mp4" controls poster="img/vertical2_thumb.jpg"
+            style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#222;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
+          <div class="showcase-card-title" style="margin-top:1rem;">Vertical Video 2 Title</div>
+        </div>
+      </div>
+
+      <!-- Large 16:9 Video Centered -->
+      <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2.5rem;">
+        <video src="video/largevideo.mp4" controls poster="img/largevideo_thumb.jpg"
+          style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
+      </div>
+      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Large Video Title</div>
     </section>
   </main>
   <script>
@@ -229,5 +411,74 @@
           window.location.href = 'index.html';
         });
       }
+
+      // Check if <model-viewer> is supported
+      if (!window.customElements || !window.customElements.get('model-viewer')) {
+        alert('Warning: <model-viewer> is not supported in this browser. Try Chrome or Edge.');
+      }
+
+      // Utility to check if model file exists
+      function checkModelFile(url, errorElem, modelName) {
+        fetch(url, { method: 'HEAD' })
+          .then(response => {
+            if (!response.ok) {
+              errorElem.textContent = `Model file "${modelName}" not found at ${url}. Check the path and file name.`;
+              errorElem.style.color = "#ff4444";
+            }
+          })
+          .catch(err => {
+            errorElem.textContent = `Error accessing "${modelName}" (${url}): ${err}`;
+            errorElem.style.color = "#ff4444";
+          });
+      }
+
+      // Add error handling for model-viewer
+      const catModelViewer = document.getElementById('cat-model-viewer');
+      if (catModelViewer) {
+        catModelViewer.addEventListener('load', () => {
+          // Hide fallback message if present
+          const fallbackDiv = catModelViewer.querySelector('div');
+          if (fallbackDiv) fallbackDiv.style.display = 'none';
+          const errorMsg = document.getElementById('cat-model-error');
+          if (errorMsg) {
+            errorMsg.textContent = "You can rotate, zoom, and explore this model interactively.";
+            errorMsg.style.color = "";
+          }
+        });
+        catModelViewer.addEventListener('error', (e) => {
+          const errorMsg = document.getElementById('cat-model-error');
+          if (errorMsg) {
+            errorMsg.textContent = "Failed to load 3D model (cat.glb). Please check your browser or try again later.";
+            errorMsg.style.color = "#ff4444";
+            checkModelFile('models/cat.glb', errorMsg, 'cat.glb');
+          }
+          console.error('Error loading cat.glb', e);
+        });
+      }
+      // Error handling for test model
+      const testModelViewer = document.getElementById('test-model-viewer');
+      if (testModelViewer) {
+        testModelViewer.addEventListener('load', () => {
+          // Hide fallback message if present
+          const fallbackDiv = testModelViewer.querySelector('div');
+          if (fallbackDiv) fallbackDiv.style.display = 'none';
+          const errorMsg = document.getElementById('test-model-error');
+          if (errorMsg) {
+            errorMsg.textContent = "This is a test model to verify viewer functionality.";
+            errorMsg.style.color = "";
+          }
+        });
+        testModelViewer.addEventListener('error', (e) => {
+          const errorMsg = document.getElementById('test-model-error');
+          if (errorMsg) {
+            errorMsg.textContent = "Failed to load test 3D model (test.glb). Please check your browser or try again later.";
+            errorMsg.style.color = "#ff4444";
+            checkModelFile('models/test.glb', errorMsg, 'test.glb');
+          }
+          console.error('Error loading test.glb', e);
+        });
+      }
     });
   </script>
+</body>
+</html>

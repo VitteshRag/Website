@@ -8,78 +8,218 @@
   <link rel="stylesheet" href="fontawesome/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; line-height: 1.6; color: #fff; background: #000; overflow-x: hidden; }
+    body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #fff; overflow-x: hidden; position: relative; background: #000; }
     a { text-decoration: none; color: inherit; }
-    #bg-video { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; pointer-events: none; user-select: none; touch-action: none; -webkit-user-drag: none; }
-    header { background: rgba(0,0,0,0.7); position: sticky; top: 0; z-index: 100; }
-    nav { display: flex; flex-direction: column; align-items: center; padding: 1rem; max-width: 960px; margin: 0 auto; }
-    .nav-logo { display: flex; align-items: center; font-weight: bold; font-size: 2rem; color: #fff; margin-bottom: 0.5rem; text-align: center; cursor: pointer; }
-    .logo-img { width: 3.5rem; height: 2.5rem; margin-right: 0.5rem; }
+
+    #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; pointer-events: none; user-select: none; touch-action: none; -webkit-user-drag: none; }
+
+    header {
+      background: rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100vw;
+      left: 0;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      padding: 0.7rem 2.2rem;
+      position: relative;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      margin-right: 0;
+      text-align: left;
+      transition: opacity 0.3s;
+      flex: 0 0 auto;
+    }
+
+    .logo-img {
+      width: 4.2rem;
+      height: 3rem;
+      margin-right: 0.7rem;
+    }
+
+    .nav-logo-text {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.04em;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+
     .nav-row { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; }
-    .nav-links { list-style: none; display: flex; gap: 2rem; }
-    .nav-links li { font-size: 1rem; position: relative; }
-    .nav-links a { color: #fff; transition: color 0.2s; }
-    .nav-links a:hover { color: #ffd700; }
-    .dropdown .dropbtn { cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+      flex: 1 1 auto;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li { position: relative; }
+    .nav-links a, .dropbtn {
+      color: #fff;
+      font-size: 1.18rem;
+      font-weight: 700;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      transition: color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a:hover, .dropbtn:hover { color: #ffd700; }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown .dropbtn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: inherit;
+      font-weight: 500;
+      color: #fff;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
     .dropdown-content {
       display: none;
       position: absolute;
       left: 0;
-      top: 2.2rem;
-      background: rgba(20,20,20,0.98);
-      min-width: 260px;
-      border-radius: 8px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      padding: 1rem 1.2rem 1rem 1.2rem;
+      top: 100%;
+      background: rgba(24,24,24,0.98);
+      min-width: 230px;
+      border-radius: 9px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 0.7rem 0.5rem 0.7rem 0.5rem;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 0.5rem;
       z-index: 100;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
     }
     .dropdown:hover .dropdown-content,
     .dropdown:focus-within .dropdown-content {
       display: flex;
     }
-    .dropdown-section { margin-bottom: 0.7rem; }
+    .dropdown-section { margin-bottom: 0.2rem; padding-bottom: 0.2rem; }
     .dropdown-heading {
-      font-weight: bold;
-      color: #ffd700;
-      font-size: 1.05rem;
-      margin-bottom: 0.4rem;
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.08rem;
+      background: rgba(40,40,40,0.92);
+      border-radius: 5px;
+      padding: 0.38rem 0.7rem 0.38rem 0.7rem;
+      margin-bottom: 0.18rem;
+      margin-top: 0.1rem;
       letter-spacing: 0.01em;
+      display: block;
     }
-    .dropdown-content a {
+    .dropdown-section a {
       display: block;
       color: #fff;
-      padding: 0.18rem 0 0.18rem 0.5rem;
+      padding: 0.32rem 0.7rem 0.32rem 1.2rem;
       text-decoration: none;
-      font-size: 1rem;
-      border-radius: 4px;
-      transition: background 0.18s, color 0.18s;
-      margin-bottom: 0.1rem;
+      font-size: 0.98rem;
+      border-radius: 3px;
+      background: none;
+      font-weight: 400;
+      transition: background 0.14s, color 0.14s;
+      margin-bottom: 0.04rem;
     }
-    .dropdown-content a:hover {
-      background: #222;
+    .dropdown-section a:hover {
+      background: #181818;
       color: #ffd700;
     }
-    .social-container { display: flex; align-items: center; gap: 1rem; position: absolute; right: 0; }
-    .social-links { list-style: none; display: flex; gap: 1rem; }
-    .social-links a { display: inline-block; transition: transform 0.2s; }
-    .social-links img, .social-links i { width: 2rem; height: 2rem; font-size: 2rem; }
-    .social-links a:hover { transform: scale(1.2); }
-    .resume-link { font-size: 1rem; padding: 0.5rem 1rem; border: 1px solid #fff; border-radius: 4px; transition: background 0.2s, color 0.2s; white-space: nowrap; }
-    .resume-link:hover { background: #fff; color: #000; }
 
-    main { max-width: 1100px; margin: 2.5rem auto 2rem auto; padding: 0 1.5rem; }
+    .social-container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: static;
+      flex: 0 0 auto;
+    }
+    .social-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .social-links a {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .social-links img, .social-links i {
+      width: 3.2rem;
+      height: 3.2rem;
+      font-size: 3.2rem;
+    }
+    .social-links a:hover {
+      transform: scale(1.25);
+    }
+    .resume-link {
+      font-size: 1.18rem;
+      padding: 0.7rem 1.3rem;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+    .resume-link:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+    section {
+      margin-bottom: 4rem;
+      background: rgba(20,20,20,0.82);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    section h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffd700;
+      border-left: none;
+      padding-left: 0;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
     .about-container {
       display: flex;
       gap: 2.5rem;
       align-items: flex-start;
-      background: rgba(20, 20, 20, 0.82); /* Darker tint for better readability */
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      padding: 2.5rem 2rem;
-      border: 1px solid rgba(255,255,255,0.22);
-      margin-bottom: 2rem;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      border: none;
+      margin-bottom: 0;
     }
     .about-text {
       flex: 2;
@@ -103,6 +243,31 @@
       border: 2px solid rgba(255,255,255,0.18);
       object-fit: cover;
       background: #222;
+      transition: transform 0.25s cubic-bezier(.25,.8,.25,1), box-shadow 0.25s cubic-bezier(.25,.8,.25,1), filter 0.25s cubic-bezier(.25,.8,.25,1);
+      will-change: transform, filter;
+      position: relative;
+      z-index: 1;
+    }
+    .about-photo {
+      perspective: 900px;
+      -webkit-perspective: 900px;
+      position: relative;
+      overflow: visible;
+    }
+    .about-photo .glare {
+      pointer-events: none;
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      border-radius: 18px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0.0) 100%);
+      opacity: 0;
+      transition: opacity 0.25s cubic-bezier(.25,.8,.25,1), background 0.25s cubic-bezier(.25,.8,.25,1), transform 0.25s cubic-bezier(.25,.8,.25,1);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .about-photo img:hover {
+      transform: scale(1.07);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.55);
     }
     @media (max-width: 900px) {
       .about-container {
@@ -126,7 +291,7 @@
       .dropdown-content {
         left: 0;
         right: auto;
-        min-width: 180px;
+        min-width: 160px;
         padding: 0.7rem 0.7rem 0.7rem 0.7rem;
       }
       main {
@@ -136,6 +301,30 @@
     @media(max-width: 600px) {
       .nav-links, .social-container { display: none; }
     }
+
+    /* Hide logo text on scroll */
+    @media (min-width: 700px) {
+      .nav-logo-text.hide-on-scroll {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.7rem 1rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+      .social-container {
+        margin-top: 0.7rem;
+        justify-content: flex-end;
+      }
+    }
   </style>
 </head>
 <body>
@@ -143,17 +332,16 @@
     <source src="video/animated_bg.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
-
   <header>
     <nav>
-      <div class="nav-logo" id="nav-logo-clickable">
-        <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
-        Vittesh Raghavan
-      </div>
-      <div class="nav-row">
+      <div class="nav-bar">
+        <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
+          <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
+          <span class="nav-logo-text">Vittesh Raghavan</span>
+        </div>
         <ul class="nav-links">
           <li class="dropdown">
-            <a href="#" class="dropbtn">Projects <i class="fas fa-caret-down"></i></a>
+            <span class="dropbtn">PROJECTS</span>
             <div class="dropdown-content">
               <div class="dropdown-section">
                 <div class="dropdown-heading">Team Projects</div>
@@ -173,8 +361,9 @@
               </div>
             </div>
           </li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="showcase.html">SHOWCASE</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="#contact">CONTACT</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -186,23 +375,24 @@
       </div>
     </nav>
   </header>
-
   <main>
-    <section class="about-container">
-      <div class="about-text">
-        <h1 style="font-size:2.1rem; margin-bottom:1.2rem; color:#ffd700;">About Me</h1>
-        <p>
-          Hello! I'm Vittesh Raghavan, a passionate game designer with a love for narrative-driven experiences and immersive worlds. My journey in game design began with a fascination for how stories and mechanics intertwine to create memorable moments for players. Over the years, I've honed my skills in level design, systems design, and interactive storytelling, always striving to craft gameplay loops that are both engaging and meaningful.<br><br>
-          I believe that great games are built on a foundation of thoughtful design, player empathy, and a willingness to experiment. Whether working solo or collaborating with a team, I approach every project with curiosity and a drive to push creative boundaries. My portfolio reflects a diverse range of projects, from atmospheric horror to cooperative puzzles, each one a testament to my dedication and growth as a designer.<br><br>
-          Outside of game development, I enjoy exploring new genres, analyzing game mechanics, and sharing insights with fellow designers. I'm always eager to learn, adapt, and contribute to the ever-evolving world of interactive entertainment.
-        </p>
-      </div>
-      <div class="about-photo">
-        <img src="img/vittesh_photo.jpg" alt="Vittesh Raghavan Photo">
+    <section>
+      <div class="about-container">
+        <div class="about-text">
+          <h2>About Me</h2>
+          <p>
+            Hello! I'm Vittesh Raghavan, a passionate game designer with a love for narrative-driven experiences and immersive worlds. My journey in game design began with a fascination for how stories and mechanics intertwine to create memorable moments for players. Over the years, I've honed my skills in level design, systems design, and interactive storytelling, always striving to craft gameplay loops that are both engaging and meaningful.<br><br>
+            I believe that great games are built on a foundation of thoughtful design, player empathy, and a willingness to experiment. Whether working solo or collaborating with a team, I approach every project with curiosity and a drive to push creative boundaries. My portfolio reflects a diverse range of projects, from atmospheric horror to cooperative puzzles, each one a testament to my dedication and growth as a designer.<br><br>
+            Outside of game development, I enjoy exploring new genres, analyzing game mechanics, and sharing insights with fellow designers. I'm always eager to learn, adapt, and contribute to the ever-evolving world of interactive entertainment.
+          </p>
+        </div>
+        <div class="about-photo">
+          <img src="img/vittesh_photo.jpg" alt="Vittesh Raghavan Photo" id="about-photo-img">
+          <div class="glare" id="about-photo-glare"></div>
+        </div>
       </div>
     </section>
   </main>
-
   <script>
     // Make logo+text clickable to go to main page if not already there
     document.addEventListener('DOMContentLoaded', () => {
@@ -211,6 +401,60 @@
         navLogo.addEventListener('click', () => {
           window.location.href = 'index.html';
         });
+      }
+
+      // Trading card effect for about photo
+      const photo = document.getElementById('about-photo-img');
+      const glare = document.getElementById('about-photo-glare');
+      const container = photo.parentElement;
+      let mouseOn = false;
+
+      function setCardEffect(e) {
+        const rect = photo.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        // Adjust rotation so it feels more natural and centered
+        const rotateY = ((x - centerX) / centerX) * 10; // -10deg to 10deg
+        const rotateX = ((centerY - y) / centerY) * 10; // -10deg to 10deg (invert for natural tilt)
+        photo.style.transform = `scale(1.07) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+        // Glare effect
+        glare.style.opacity = '0.45';
+        // Center glare and make it follow mouse
+        const glarePosX = (x / rect.width) * 100;
+        const glarePosY = (y / rect.height) * 100;
+        glare.style.background = `radial-gradient(circle at ${glarePosX}% ${glarePosY}%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.10) 60%, rgba(255,255,255,0.0) 100%)`;
+        glare.style.transform = 'none';
+      }
+
+      function resetCardEffect() {
+        photo.style.transform = '';
+        glare.style.opacity = '0';
+        glare.style.background = '';
+        glare.style.transform = '';
+      }
+
+      photo.addEventListener('mousemove', setCardEffect);
+      photo.addEventListener('mouseleave', resetCardEffect);
+      photo.addEventListener('mouseenter', (e) => {
+        mouseOn = true;
+        glare.style.opacity = '0.45';
+      });
+      photo.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          setCardEffect(e.touches[0]);
+        }
+      });
+      photo.addEventListener('touchend', resetCardEffect);
+    });
+
+    window.addEventListener('scroll', () => {
+      const logoText = document.querySelector('.nav-logo-text');
+      if (window.scrollY > 40) {
+        logoText.classList.add('hide-on-scroll');
+      } else {
+        logoText.classList.remove('hide-on-scroll');
       }
     });
   </script>

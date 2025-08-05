@@ -15,31 +15,122 @@
 
     #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
 
-    header { background: rgba(0,0,0,0.7); position: sticky; top: 0; z-index: 100; }
-    nav { display: flex; flex-direction: column; align-items: center; padding: 1rem; max-width: 960px; margin: 0 auto; }
-    .nav-logo { display: flex; align-items: center; font-weight: bold; font-size: 2rem; color: #fff; margin-bottom: 0.5rem; text-align: center; }
-    .logo-img { width: 3.5rem; height: 2.5rem; margin-right: 0.5rem; }
+    header {
+      background: rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100vw;
+      left: 0;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      padding: 0.7rem 2.2rem; /* <-- Add left/right padding here */
+      position: relative;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      margin-right: 0;
+      text-align: left;
+      transition: opacity 0.3s;
+      flex: 0 0 auto;
+    }
+    .logo-img {
+      width: 4.2rem;
+      height: 3rem;
+      margin-right: 0.7rem;
+    }
+    .nav-logo-text {
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.04em;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
     .nav-row { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; }
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 2rem;
-      position: relative;
-      z-index: 10;
+      gap: 2.5rem;
+      flex: 1 1 auto;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
     }
     .nav-links li {
       position: relative;
     }
-    .nav-links a { color: #fff; transition: color 0.2s; }
-    .nav-links a:hover { color: #ddd; }
+    .nav-links a, .dropbtn {
+      color: #fff;
+      font-size: 1.18rem;
+      font-weight: 700;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      transition: color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a:hover, .dropbtn:hover {
+      color: #ffd700;
+    }
 
-    .social-container { display: flex; align-items: center; gap: 1rem; position: absolute; right: 0; }
-    .social-links { list-style: none; display: flex; gap: 1rem; }
-    .social-links a { display: inline-block; transition: transform 0.2s; }
-    .social-links img, .social-links i { width: 2rem; height: 2rem; font-size: 2rem; }
-    .social-links a:hover { transform: scale(1.2); }
-    .resume-link { font-size: 1rem; padding: 0.5rem 1rem; border: 1px solid #fff; border-radius: 4px; transition: background 0.2s, color 0.2s; white-space: nowrap; }
-    .resume-link:hover { background: #fff; color: #000; }
+    .social-container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: static;
+      flex: 0 0 auto;
+    }
+    .social-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .social-links a {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .social-links img, .social-links i {
+      width: 3.2rem;
+      height: 3.2rem;
+      font-size: 3.2rem;
+    }
+    .social-links a:hover {
+      transform: scale(1.25);
+    }
+    .resume-link {
+      font-size: 1.18rem;
+      padding: 0.7rem 1.3rem;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+    .resume-link:hover {
+      background: #fff;
+      color: #000;
+    }
 
     main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
     section {
@@ -376,6 +467,30 @@
       background: #181818;
       color: #ffd700;
     }
+
+    /* Hide logo text on scroll */
+    @media (min-width: 700px) {
+      .nav-logo-text.hide-on-scroll {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.7rem 1rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+      .social-container {
+        margin-top: 0.7rem;
+        justify-content: flex-end;
+      }
+    }
   </style>
 </head>
 <body>
@@ -397,15 +512,14 @@
 
   <header>
     <nav>
-      <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
-        <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
-        Vittesh Raghavan
-      </div>
-      <div class="nav-row">
-        <ul class="nav-links" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">
+      <div class="nav-bar">
+        <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
+          <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
+          <span class="nav-logo-text">Vittesh Raghavan</span>
+        </div>
+        <ul class="nav-links">
           <li class="dropdown">
-            <!-- Remove href="#" to prevent click/focus trap -->
-            <span class="dropbtn" style="font-family: inherit; font-weight: 500; cursor:pointer;">Projects</span>
+            <span class="dropbtn">PROJECTS</span>
             <div class="dropdown-content">
               <div class="dropdown-section">
                 <div class="dropdown-heading">Team Projects</div>
@@ -425,9 +539,9 @@
               </div>
             </div>
           </li>
-          <li><a href="showcase.html" style="font-family: inherit; font-weight: 500;">Showcase</a></li>
-          <li><a href="about.html" style="font-family: inherit; font-weight: 500;">About</a></li>
-          <li><a href="#contact" style="font-family: inherit; font-weight: 500;">Contact</a></li>
+          <li><a href="showcase.html">SHOWCASE</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="#contact">CONTACT</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -441,10 +555,6 @@
   </header>
 
   <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>I’m a passionate game designer specializing in narrative-driven experiences. With a background in level design and systems design, I craft engaging gameplay loops and immersive worlds.</p>
-    </section>
 
     <section id="projects">
       <h2>Projects</h2>
@@ -665,6 +775,15 @@
         navLogo.addEventListener('click', () => {
           window.location.href = 'index.html';
         });
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      const logoText = document.querySelector('.nav-logo-text');
+      if (window.scrollY > 40) {
+        logoText.classList.add('hide-on-scroll');
+      } else {
+        logoText.classList.remove('hide-on-scroll');
       }
     });
   </script>
