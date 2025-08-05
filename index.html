@@ -20,8 +20,16 @@
     .nav-logo { display: flex; align-items: center; font-weight: bold; font-size: 2rem; color: #fff; margin-bottom: 0.5rem; text-align: center; }
     .logo-img { width: 3.5rem; height: 2.5rem; margin-right: 0.5rem; }
     .nav-row { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; }
-    .nav-links { list-style: none; display: flex; gap: 2rem; }
-    .nav-links li { font-size: 1rem; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      position: relative;
+      z-index: 10;
+    }
+    .nav-links li {
+      position: relative;
+    }
     .nav-links a { color: #fff; transition: color 0.2s; }
     .nav-links a:hover { color: #ddd; }
 
@@ -290,6 +298,84 @@
       pointer-events: none;
       transition: opacity 0.6s, visibility 0.6s;
     }
+
+    /* Prevent background video from being interactive or focusable */
+    #bg-video {
+      pointer-events: none;
+      user-select: none;
+      touch-action: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block; /* Ensures the dropdown area covers the button and the menu */
+    }
+
+    .dropdown .dropbtn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background: rgba(24,24,24,0.98);
+      min-width: 230px;
+      border-radius: 9px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 100;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+      display: flex;
+    }
+
+    .dropdown-section {
+      margin-bottom: 0.2rem;
+      padding-bottom: 0.2rem;
+    }
+
+    .dropdown-heading {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.08rem;
+      background: rgba(40,40,40,0.92);
+      border-radius: 5px;
+      padding: 0.38rem 0.7rem 0.38rem 0.7rem;
+      margin-bottom: 0.18rem;
+      margin-top: 0.1rem;
+      letter-spacing: 0.01em;
+      display: block;
+    }
+
+    .dropdown-section a {
+      display: block;
+      color: #fff;
+      padding: 0.32rem 0.7rem 0.32rem 1.2rem;
+      text-decoration: none;
+      font-size: 0.98rem;
+      border-radius: 3px;
+      background: none;
+      font-weight: 400;
+      transition: background 0.14s, color 0.14s;
+      margin-bottom: 0.04rem;
+    }
+
+    .dropdown-section a:hover {
+      background: #181818;
+      color: #ffd700;
+    }
   </style>
 </head>
 <body>
@@ -304,7 +390,7 @@
     </div>
   </div>
 
-  <video autoplay muted loop id="bg-video">
+  <video autoplay muted loop id="bg-video" tabindex="-1" aria-hidden="true">
     <source src="video/animated_bg.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
@@ -316,11 +402,32 @@
         Vittesh Raghavan
       </div>
       <div class="nav-row">
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <ul class="nav-links" style="font-family: 'Inter', 'Segoe UI', Arial, sans-serif;">
+          <li class="dropdown">
+            <!-- Remove href="#" to prevent click/focus trap -->
+            <span class="dropbtn" style="font-family: inherit; font-weight: 500; cursor:pointer;">Projects</span>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <div class="dropdown-heading">Team Projects</div>
+                <a href="#">Conquering of the Royal Keep</a>
+                <a href="#">Finding Freeman</a>
+                <a href="#">Rehab Reality</a>
+              </div>
+              <div class="dropdown-section">
+                <div class="dropdown-heading">Individual Projects</div>
+                <a href="#">Wordle 2.0</a>
+                <a href="project4.html">Hooked</a>
+              </div>
+              <div class="dropdown-section">
+                <div class="dropdown-heading">Game Jams</div>
+                <a href="project3.html">UEFN Co-op</a>
+                <a href="project2.html">Losing It</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="showcase.html" style="font-family: inherit; font-weight: 500;">Showcase</a></li>
+          <li><a href="about.html" style="font-family: inherit; font-weight: 500;">About</a></li>
+          <li><a href="#contact" style="font-family: inherit; font-weight: 500;">Contact</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -563,8 +670,3 @@
   </script>
 </body>
 </html>
-
-/* styles.css */
-body { font-family: sans-serif; margin: 0; padding: 1rem; }
-header { background: #222; color: #fff; padding: 1rem; }
-section { margin-top: 4rem; }

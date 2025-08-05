@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – Vittesh Raghavan</title>
+  <meta name="description" content="Learn more about Vittesh Raghavan, game designer specializing in narrative-driven experiences, level design, and systems design.">
+  <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #fff; background: #000; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    #bg-video { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1; pointer-events: none; user-select: none; touch-action: none; -webkit-user-drag: none; }
+    header { background: rgba(0,0,0,0.7); position: sticky; top: 0; z-index: 100; }
+    nav { display: flex; flex-direction: column; align-items: center; padding: 1rem; max-width: 960px; margin: 0 auto; }
+    .nav-logo { display: flex; align-items: center; font-weight: bold; font-size: 2rem; color: #fff; margin-bottom: 0.5rem; text-align: center; cursor: pointer; }
+    .logo-img { width: 3.5rem; height: 2.5rem; margin-right: 0.5rem; }
+    .nav-row { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; }
+    .nav-links { list-style: none; display: flex; gap: 2rem; }
+    .nav-links li { font-size: 1rem; position: relative; }
+    .nav-links a { color: #fff; transition: color 0.2s; }
+    .nav-links a:hover { color: #ffd700; }
+    .dropdown .dropbtn { cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 2.2rem;
+      background: rgba(20,20,20,0.98);
+      min-width: 260px;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      padding: 1rem 1.2rem 1rem 1.2rem;
+      flex-direction: column;
+      gap: 1.2rem;
+      z-index: 100;
+    }
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+      display: flex;
+    }
+    .dropdown-section { margin-bottom: 0.7rem; }
+    .dropdown-heading {
+      font-weight: bold;
+      color: #ffd700;
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.01em;
+    }
+    .dropdown-content a {
+      display: block;
+      color: #fff;
+      padding: 0.18rem 0 0.18rem 0.5rem;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: background 0.18s, color 0.18s;
+      margin-bottom: 0.1rem;
+    }
+    .dropdown-content a:hover {
+      background: #222;
+      color: #ffd700;
+    }
+    .social-container { display: flex; align-items: center; gap: 1rem; position: absolute; right: 0; }
+    .social-links { list-style: none; display: flex; gap: 1rem; }
+    .social-links a { display: inline-block; transition: transform 0.2s; }
+    .social-links img, .social-links i { width: 2rem; height: 2rem; font-size: 2rem; }
+    .social-links a:hover { transform: scale(1.2); }
+    .resume-link { font-size: 1rem; padding: 0.5rem 1rem; border: 1px solid #fff; border-radius: 4px; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+    .resume-link:hover { background: #fff; color: #000; }
+
+    main { max-width: 1100px; margin: 2.5rem auto 2rem auto; padding: 0 1.5rem; }
+    .about-container {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+      background: rgba(20, 20, 20, 0.82); /* Darker tint for better readability */
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,0.22);
+      margin-bottom: 2rem;
+    }
+    .about-text {
+      flex: 2;
+      font-size: 1.18rem;
+      color: #fff;
+      line-height: 1.85;
+      letter-spacing: 0.01em;
+      font-weight: 400;
+    }
+    .about-photo {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+    .about-photo img {
+      width: 320px;
+      max-width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.35);
+      border: 2px solid rgba(255,255,255,0.18);
+      object-fit: cover;
+      background: #222;
+    }
+    @media (max-width: 900px) {
+      .about-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 0.7rem;
+      }
+      .about-photo {
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .about-photo img {
+        width: 220px;
+      }
+    }
+    @media (max-width: 700px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .dropdown-content {
+        left: 0;
+        right: auto;
+        min-width: 180px;
+        padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+      }
+      main {
+        padding: 0 0.3rem;
+      }
+    }
+    @media(max-width: 600px) {
+      .nav-links, .social-container { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="bg-video" tabindex="-1" aria-hidden="true">
+    <source src="video/animated_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <nav>
+      <div class="nav-logo" id="nav-logo-clickable">
+        <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
+        Vittesh Raghavan
+      </div>
+      <div class="nav-row">
+        <ul class="nav-links">
+          <li class="dropdown">
+            <a href="#" class="dropbtn">Projects <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <div class="dropdown-heading">Team Projects</div>
+                <a href="#">Conquering of the Royal Keep</a>
+                <a href="#">Finding Freeman</a>
+                <a href="#">Rehab Reality</a>
+              </div>
+              <div class="dropdown-section">
+                <div class="dropdown-heading">Individual Projects</div>
+                <a href="#">Wordle 2.0</a>
+                <a href="project4.html">Hooked</a>
+              </div>
+              <div class="dropdown-section">
+                <div class="dropdown-heading">Game Jams</div>
+                <a href="project3.html">UEFN Co-op</a>
+                <a href="project2.html">Losing It</a>
+              </div>
+            </div>
+          </li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="social-container">
+          <ul class="social-links">
+            <li><a href="https://www.youtube.com/@vittesh9933" target="_blank" aria-label="YouTube"><img src="img/youtube.png" alt="YouTube"></a></li>
+            <li><a href="https://www.linkedin.com/in/vittesh-raghavan-546397225/" target="_blank" aria-label="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn"></a></li>
+          </ul>
+          <a href="resume.pdf" target="_blank" class="resume-link">Resume</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="about-container">
+      <div class="about-text">
+        <h1 style="font-size:2.1rem; margin-bottom:1.2rem; color:#ffd700;">About Me</h1>
+        <p>
+          Hello! I'm Vittesh Raghavan, a passionate game designer with a love for narrative-driven experiences and immersive worlds. My journey in game design began with a fascination for how stories and mechanics intertwine to create memorable moments for players. Over the years, I've honed my skills in level design, systems design, and interactive storytelling, always striving to craft gameplay loops that are both engaging and meaningful.<br><br>
+          I believe that great games are built on a foundation of thoughtful design, player empathy, and a willingness to experiment. Whether working solo or collaborating with a team, I approach every project with curiosity and a drive to push creative boundaries. My portfolio reflects a diverse range of projects, from atmospheric horror to cooperative puzzles, each one a testament to my dedication and growth as a designer.<br><br>
+          Outside of game development, I enjoy exploring new genres, analyzing game mechanics, and sharing insights with fellow designers. I'm always eager to learn, adapt, and contribute to the ever-evolving world of interactive entertainment.
+        </p>
+      </div>
+      <div class="about-photo">
+        <img src="img/vittesh_photo.jpg" alt="Vittesh Raghavan Photo">
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Make logo+text clickable to go to main page if not already there
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLogo = document.getElementById('nav-logo-clickable');
+      if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && window.location.pathname !== '/portfolio/Website/') {
+        navLogo.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
