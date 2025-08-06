@@ -491,6 +491,32 @@
         justify-content: flex-end;
       }
     }
+
+    /* Page transition overlay styles */
+    #page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transition: opacity 0.5s cubic-bezier(.4,2,.6,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #page-transition-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #page-transition-spinner {
+      color: #ffd700;
+      font-size: 2.5rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
@@ -518,27 +544,8 @@
           <span class="nav-logo-text">Vittesh Raghavan</span>
         </div>
         <ul class="nav-links">
-          <li class="dropdown">
-            <span class="dropbtn">PROJECTS</span>
-            <div class="dropdown-content">
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Team Projects</div>
-                <a href="#">Conquering of the Royal Keep</a>
-                <a href="#">Finding Freeman</a>
-                <a href="#">Rehab Reality</a>
-              </div>
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Individual Projects</div>
-                <a href="#">Wordle 2.0</a>
-                <a href="project4.html">Hooked</a>
-              </div>
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Game Jams</div>
-                <a href="project3.html">UEFN Co-op</a>
-                <a href="project2.html">Losing It</a>
-              </div>
-            </div>
-          </li>
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="projects.html">PROJECTS</a></li>
           <li><a href="showcase.html">SHOWCASE</a></li>
           <li><a href="about.html">ABOUT</a></li>
           <li><a href="#contact">CONTACT</a></li>
@@ -553,6 +560,11 @@
       </div>
     </nav>
   </header>
+
+  <!-- Page Transition Overlay -->
+  <div id="page-transition-overlay">
+    <i id="page-transition-spinner" class="fas fa-spinner"></i>
+  </div>
 
   <main>
 
@@ -785,6 +797,46 @@
       } else {
         logoText.classList.remove('hide-on-scroll');
       }
+    });
+
+    // Page transition logic
+    document.addEventListener('DOMContentLoaded', () => {
+      // Intercept all internal links for transition
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        // Only intercept local links (not external, not anchors, not mailto)
+        if (
+          href &&
+          !href.startsWith('http') &&
+          !href.startsWith('mailto:') &&
+          !href.startsWith('#') &&
+          !link.hasAttribute('target')
+        ) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const overlay = document.getElementById('page-transition-overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 400); // Duration matches CSS transition
+          });
+        }
+      });
+
+      // Also intercept project cards if they use onclick navigation
+      document.querySelectorAll('.project-card[onclick]').forEach(card => {
+        card.addEventListener('click', function(e) {
+          const href = card.getAttribute('onclick').match(/'([^']+)'/);
+          if (href && href[1]) {
+            e.preventDefault();
+            const overlay = document.getElementById('page-transition-overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+              window.location.href = href[1];
+            }, 400);
+          }
+        });
+      });
     });
   </script>
 </body>

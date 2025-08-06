@@ -7,6 +7,32 @@
   <meta name="description" content="Showcase of 3D models, animations, and video edits by Vittesh Raghavan.">
   <link rel="stylesheet" href="fontawesome/css/all.min.css">
   <style>
+    #page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transition: opacity 0.5s cubic-bezier(.4,2,.6,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #page-transition-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #page-transition-spinner {
+      color: #ffd700;
+      font-size: 2.5rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #fff; overflow-x: hidden; position: relative; background: #000; }
     a { text-decoration: none; color: inherit; }
@@ -235,7 +261,7 @@
     }
     .showcase-title {
       font-size: 2rem;
-      color: #ffd700;
+      color: #ffffff;
       margin-bottom: 1.5rem;
       font-weight: 700;
       letter-spacing: 0.01em;
@@ -289,6 +315,10 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
 <body>
+  <!-- Page Transition Overlay -->
+  <div id="page-transition-overlay">
+    <i id="page-transition-spinner" class="fas fa-spinner"></i>
+  </div>
   <video autoplay muted loop id="bg-video" tabindex="-1" aria-hidden="true">
     <source src="video/animated_bg.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -340,13 +370,14 @@
     <section class="showcase-section">
       <div class="showcase-title">Showcase: 3D Models, Animations & Video Edits</div>
       
-      <!-- Large 16:9 Image Centered -->
+      <!-- 1. Large 16:9 Video Centered -->
       <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2.5rem;">
-        <img src="img/large1.png" alt="Large Showcase Image" style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+        <video src="video/largevideo.mp4" controls poster="img/largevideo_thumb.jpg"
+          style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
       </div>
-      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Large Image Title</div>
+      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">"Robo Spider"</div>
 
-      <!-- Row: 2 Model Boxes Side by Side -->
+      <!-- 2. Row: 2 Model Boxes Side by Side -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;justify-items:center;align-items:start;margin-bottom:2.5rem;">
         <div class="showcase-card" style="background:#222;width:100%;max-width:420px;">
           <model-viewer src="models/cat.glb" alt="Interactable 3D Model"
@@ -374,35 +405,79 @@
         </div>
       </div>
 
-      <!-- Large 16:9 Image Centered -->
+      <!-- 3. Large 16:9 Image Centered -->
       <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2.5rem;">
-        <img src="img/large2.png" alt="Second Large Showcase Image" style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+        <img src="img/large1.png" alt="Large Showcase Image" style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
       </div>
-      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Second Large Image Title</div>
+      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Large Image Title</div>
 
-      <!-- Row: 2 Vertical 9:16 Videos Side by Side -->
+      <!-- 4. Row: 2 Vertical 9:16 Videos Side by Side -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;justify-items:center;align-items:start;margin-bottom:2.5rem;">
-        <div class="showcase-card" style="background:#222;width:100%;max-width:320px;">
-          <video src="video/vertical1.mp4" controls poster="img/vertical1_thumb.jpg"
-            style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#222;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
+        <div class="showcase-card" style="background:#222222;width:100%;max-width:320px;position:relative;">
+          <video src="video/vertical1.mp4" muted playsinline loop poster="img/vertical1_thumb.jpg"
+            style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#222;box-shadow:0 4px 24px rgba(0,0,0,0.18);" id="vertical1"></video>
+          <button class="mute-btn" data-video="vertical1" aria-label="Mute/Unmute" style="position:absolute;top:14px;right:14px;padding:0.5em;border-radius:50%;background:rgba(0, 0, 0, 0);border:none;cursor:pointer;z-index:2;">
+            <i class="fas fa-volume-mute" style="color:#ffffff;font-size:1.4em;"></i>
+          </button>
           <div class="showcase-card-title" style="margin-top:1rem;">Vertical Video 1 Title</div>
         </div>
-        <div class="showcase-card" style="background:#222;width:100%;max-width:320px;">
-          <video src="video/vertical2.mp4" controls poster="img/vertical2_thumb.jpg"
-            style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#222;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
+        <div class="showcase-card" style="background:#222;width:100%;max-width:320px;position:relative;">
+          <video src="video/vertical2.mp4" muted playsinline loop poster="img/vertical2_thumb.jpg"
+            style="width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:8px;background:#222;box-shadow:0 4px 24px rgba(0,0,0,0.18);" id="vertical2"></video>
+          <button class="mute-btn" data-video="vertical2" aria-label="Mute/Unmute" style="position:absolute;top:14px;right:14px;padding:0.5em;border-radius:50%;background:rgba(0, 0, 0, 0);border:none;cursor:pointer;z-index:2;">
+            <i class="fas fa-volume-mute" style="color:#ffffff;font-size:1.4em;"></i>
+          </button>
           <div class="showcase-card-title" style="margin-top:1rem;">Vertical Video 2 Title</div>
         </div>
       </div>
 
-      <!-- Large 16:9 Video Centered -->
+      <!-- 5. Large 16:9 Image Centered (last) -->
       <div style="display:flex;justify-content:center;align-items:center;margin-bottom:2.5rem;">
-        <video src="video/largevideo.mp4" controls poster="img/largevideo_thumb.jpg"
-          style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);"></video>
+        <img src="img/large2.png" alt="Second Large Showcase Image" style="width:100%;max-width:900px;aspect-ratio:16/9;object-fit:cover;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,0.18);">
       </div>
-      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Large Video Title</div>
+      <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Second Large Image Title</div>
     </section>
   </main>
   <script>
+    // Page transition logic
+    document.addEventListener('DOMContentLoaded', () => {
+      // Intercept all internal links for transition
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        // Only intercept local links (not external, not anchors, not mailto)
+        if (
+          href &&
+          !href.startsWith('http') &&
+          !href.startsWith('mailto:') &&
+          !href.startsWith('#') &&
+          !link.hasAttribute('target')
+        ) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const overlay = document.getElementById('page-transition-overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 400); // Duration matches CSS transition
+          });
+        }
+      });
+
+      // Also intercept project cards if they use onclick navigation
+      document.querySelectorAll('.project-card[onclick]').forEach(card => {
+        card.addEventListener('click', function(e) {
+          const href = card.getAttribute('onclick').match(/'([^']+)'/);
+          if (href && href[1]) {
+            e.preventDefault();
+            const overlay = document.getElementById('page-transition-overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+              window.location.href = href[1];
+            }, 400);
+          }
+        });
+      });
+    });
     // Make logo+text clickable to go to main page if not already there
     document.addEventListener('DOMContentLoaded', () => {
       const navLogo = document.getElementById('nav-logo-clickable');
@@ -478,6 +553,47 @@
           console.error('Error loading test.glb', e);
         });
       }
+    });
+    // Auto-play videos when centered in viewport
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ensure all videos loop
+      document.querySelectorAll('video').forEach(video => {
+        video.loop = true;
+      });
+
+      const videos = document.querySelectorAll('video');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const video = entry.target;
+            video.muted = true;
+            video.playsInline = true;
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+              video.play();
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: [0.1] });
+        videos.forEach(video => {
+          observer.observe(video);
+        });
+      }
+
+      // Mute/unmute button logic for vertical videos
+      document.querySelectorAll('.mute-btn').forEach(btn => {
+        const videoId = btn.getAttribute('data-video');
+        const video = document.getElementById(videoId);
+        btn.addEventListener('click', function() {
+          if (video.muted) {
+            video.muted = false;
+            btn.innerHTML = '<i class="fas fa-volume-up" style="color:#ffd700;font-size:1.4em;"></i>';
+          } else {
+            video.muted = true;
+            btn.innerHTML = '<i class="fas fa-volume-mute" style="color:#ffd700;font-size:1.4em;"></i>';
+          }
+        });
+      });
     });
   </script>
 </body>
