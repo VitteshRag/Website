@@ -8,6 +8,7 @@
   <meta name="description" content="Portfolio of Vittesh Raghavan, a game designer specializing in narrative-driven experiences, level design, and systems design.">
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; line-height: 1.6; color: #fff; overflow-x: hidden; position: relative; background: #000; }
@@ -53,13 +54,13 @@
       flex: 0 0 auto;
     }
     .logo-img {
-      width: 4.2rem;
-      height: 3rem;
+      width: 3.2rem;
+      height: 2.1rem;
       margin-right: 0.7rem;
     }
     .nav-logo-text {
-      font-weight: bold;
-      font-size: 2rem;
+      font-weight: 200;
+      font-size: 1.5rem;
       color: #fff;
       font-family: Arial, sans-serif;
       letter-spacing: 0.04em;
@@ -83,15 +84,18 @@
     }
     .nav-links a, .dropbtn {
       color: #fff;
-      font-size: 1.18rem;
-      font-weight: 700;
+      font-size: 1.20rem;
+      font-weight: 500;
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-      transition: color 0.2s;
-      text-transform: uppercase;
+      transition: color 0.32s cubic-bezier(.4,2,.6,1), transform 0.32s cubic-bezier(.4,2,.6,1);
+      text-transform: standard;
       letter-spacing: 0.04em;
     }
-    .nav-links a:hover, .dropbtn:hover {
-      color: #ffd700;
+
+    .nav-links .dropbtn:hover {
+      color: #5ed817;
+      transform: scale(1.12);
+      transition: color 0.5s cubic-bezier(.4,2,.6,1), transform 0.5s cubic-bezier(.4,2,.6,1);
     }
 
     .social-container {
@@ -120,10 +124,10 @@
     }
     .resume-link {
       font-size: 1.18rem;
-      padding: 0.7rem 1.3rem;
-      border: 2px solid #fff;
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.2s;
       white-space: nowrap;
       margin-left: 1rem;
     }
@@ -132,17 +136,17 @@
       color: #000;
     }
 
-    main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+    main { max-width: 1400px; margin: 2rem auto; padding: 0 1rem; }
     section {
       margin-bottom: 4rem;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
+      background: rgba(90, 90, 90, 0.062);
+      backdrop-filter: blur(20px);
       padding: 1.5rem;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.3);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border: 0px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0px 20px rgba(129, 129, 129, 0.205);
     }
-    section h2 { margin-bottom: 1rem; font-size: 1.5rem; border-left: 4px solid #fff; padding-left: .5rem; }
+    section h2 { margin-bottom: 1rem; font-size: 1.5rem; border-left: 2px solid #fff; padding-left: .5rem; }
     section p, section ul { margin-top: .5rem; }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
     .project-card {
@@ -150,7 +154,7 @@
       backdrop-filter: blur(8px);
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.25);
+      border: 0px solid rgba(255,255,255,0.25);
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
       position: relative;
       cursor: pointer;
@@ -169,20 +173,18 @@
     .video-container {
       position: relative;
       width: 100%;
-      height: 220px;
+      height: 257px;
       overflow: hidden;
       display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .project-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: #222;
+    .project-image {
       display: block;
-      pointer-events: none;
-      user-select: none;
-      touch-action: none;
-      -webkit-user-drag: none;
+      margin: auto;
+      max-width: 150%;    /* Change this value to size images horizontally (e.g. 100%, 80%, 300px) */
+      max-height: 200%;   /* Change this value to size images vertically (e.g. 100%, 80%, 200px) */
+      object-fit: contain; /* Use 'cover' to crop, 'contain' to fit entire image */
     }
     .card-title {
       width: 100%;
@@ -248,8 +250,8 @@
     }
     .skill-item {
       background: rgba(20, 20, 20, 0.65); /* Darker and more visible */
-      border-radius: 6px;
-      padding: 0.5rem 1.1rem;
+      border-radius: 10px;
+      padding: 1.0rem 0.3rem;
       font-size: 1rem;
       color: #fff;
       margin-bottom: 0.5rem;
@@ -259,7 +261,7 @@
       justify-content: center;
       gap: 0.4rem;
       min-width: 120px;
-      border: 1px solid rgba(255,255,255,0.13);
+      border: 0px solid rgba(255,255,255,0.13);
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       user-select: none;
       font-weight: 500;
@@ -567,6 +569,42 @@
       color: #979797;
       transform: scale(1.12);
     }
+
+    /* New styles for project card logos */
+    .card-logos {
+      position: absolute;
+      left: 50%;
+      top: 80%;
+      transform: translate(-50%, 0);
+      display: flex;
+      gap: 0.7rem;
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .card-logo-img {
+      width: 42px;
+      height: 42px;
+      opacity: 0.7;
+      transform: scale(0.7) translateY(40px);
+      transition: 
+        transform 0.5s cubic-bezier(.4,2,.6,1),
+        opacity 0.3s;
+      filter: drop-shadow(0 2px 8px #000);
+      will-change: transform, opacity;
+      object-fit: contain; /* Add this to preserve logo aspect ratio */
+      aspect-ratio: 1 / 1; /* Remove or adjust this if your logos are not square */
+      background: transparent;
+    }
+    .project-card:hover .card-logos {
+      opacity: 1;
+      z-index: 10;
+    }
+    .project-card:hover .card-logo-img {
+      opacity: 1;
+      transform: scale(1) translateY(-20px);
+    }
   </style>
 </head>
 <body>
@@ -594,11 +632,26 @@
           <span class="nav-logo-text">Vittesh Raghavan</span>
         </div>
         <ul class="nav-links">
-          <li><a href="index.html">HOME</a></li>
-          <li><a href="projects.html">PROJECTS</a></li>
-          <li><a href="showcase.html">SHOWCASE</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="#contact">CONTACT</a></li>
+          <li class="dropdown">
+            <a class="dropbtn" href="#">PROJECTS <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <span class="dropdown-heading">Published Projects</span>
+                <a href="crk.html">Conquering of The Royal Keep</a>
+                <a href="vordle.html">Vordle</a>
+                <span class="dropdown-heading">WIP</span>
+                <a href="hooked.html">Hooked</a>
+                <a href="elixirblitz.html">Elixir Blitz</a>
+                <a href="rehabreality.html">Rehab Reality</a>
+                <span class="dropdown-heading">Game Jams</span>
+                <a href="uefn.html">UEFN</a>
+                <a href="losingit.html">Losing It</a>
+                <a href="ff.html">Finding Freeman</a>
+              </div>
+            </div>
+          </li>
+          <li><a class="dropbtn" href="showcase.html">SHOWCASE</a></li>
+          <li><a class="dropbtn" href="about.html">ABOUT</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -621,45 +674,145 @@
     <section id="projects">
       <h2>Projects</h2>
       <div class="projects-grid">
-        <div class="project-card" onclick="window.location.href='project1.html'">
+        <!-- Conquering of The Royal Keep -->
+  <div class="project-card" onclick="window.location.href='crk.html'">
+          <div class="card-logos">
+            <!-- Example: Unity logo and custom logo -->
+             <img src="img/ue_logo.png" alt="Unreal Engine" class="card-logo-img">
+            <img src="img/renpy_logo.png" alt="Renpy" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
           <div class="video-container">
-            <video class="project-video" src="video/portfolio.mp4" autoplay muted loop></video>
+            <img src="img/thumbnails/crk_thumbnail.png" alt="Conquering of The Royal Keep" class="project-image">
             <div class="card-desc">
-              <div class="desc-heading">Personal Project</div>
-              <div class="desc-text">A showcase of my portfolio, featuring highlights of my best work and a summary of my design philosophy and approach.</div>
+              <div class="desc-heading">Published Project</div>
+              <div class="desc-text">
+                A decision-driven visual novel. Play as a squire facing mysterious trials in the Royal Keep, dying and retrying until you uncover its secrets.
+              </div>
             </div>
           </div>
-          <div class="card-title">Overview</div>
+          <div class="card-title">Conquering of The Royal Keep</div>
         </div>
-        <div class="project-card" onclick="window.location.href='project2.html'">
+        <!-- Vordle -->
+  <div class="project-card" onclick="window.location.href='vordle.html'">
+          <div class="card-logos">
+            <img src="img/unity_logo.png" alt="Unity" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
           <div class="video-container">
-            <video class="project-video" src="video/losingit.mp4" autoplay muted loop></video>
+            <img src="img/thumbnails/vordle_thumbnail.png" alt="Vordle" class="project-image">
             <div class="card-desc">
-              <div class="desc-heading">Personal Project</div>
-              <div class="desc-text">A surreal horror game where players race to escape their nightmare and return to their sleeping body before the shadow catches them. Features atmospheric design and psychological tension.</div>
+              <div class="desc-heading">Published Project</div>
+              <div class="desc-text">
+                A Wordle-inspired web game with Easy and Hard modes. Hard mode gives only positional feedback, making it a tougher logic puzzle.
+              </div>
+            </div>
+          </div>
+          <div class="card-title">Vordle</div>
+        </div>
+        <!-- UEFN -->
+  <div class="project-card" onclick="window.location.href='uefn.html'">
+          <div class="card-logos">
+            <img src="img/ue_logo.png" alt="Unreal Engine" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
+          <div class="video-container">
+            <img src="img/thumbnails/uefn_thumbnail.png" alt="UEFN" class="project-image">
+            <div class="card-desc">
+              <div class="desc-heading">Game Jam</div>
+              <div class="desc-text">
+                A 2-player co-op game jam project. One player is a sniper, the other a runner—work together to solve puzzles and defeat enemies.
+              </div>
+            </div>
+          </div>
+          <div class="card-title">UEFN</div>
+        </div>
+        <!-- Losing It -->
+  <div class="project-card" onclick="window.location.href='losingit.html'">
+          <div class="card-logos">
+            <img src="img/ue_logo.png" alt="Unreal Engine" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
+          <div class="video-container">
+            <img src="img/thumbnails/losingit_thumbnail.png" alt="Losing It" class="project-image">
+            <div class="card-desc">
+              <div class="desc-heading">Game Jam</div>
+              <div class="desc-text">
+                Escape a surreal nightmare before the shadow catches you. Atmospheric horror focused on tension and psychological challenge.
+              </div>
             </div>
           </div>
           <div class="card-title">Losing It</div>
         </div>
-        <div class="project-card" onclick="window.location.href='project3.html'">
-          <div class="video-container">
-            <video class="project-video" src="video/uefn.mp4" autoplay muted loop></video>
-            <div class="card-desc">
-              <div class="desc-heading">Personal Project</div>
-              <div class="desc-text">A 2-player co-op game where communication and teamwork are key. Each player takes on a unique role—one as a sniper, the other as a runner. Solve dynamic puzzles and defeat enemies together.</div>
-            </div>
+        <!-- Hooked -->
+  <div class="project-card" onclick="window.location.href='hooked.html'">
+          <div class="card-logos">
+            <img src="img/ue_logo.png" alt="Unreal Engine" class="card-logo-img">
+            <!-- Add more logos as needed -->
           </div>
-          <div class="card-title">UEFN Gamejam</div>
-        </div>
-        <div class="project-card" onclick="window.location.href='project4.html'">
           <div class="video-container">
-            <video class="project-video" src="video/hooked.mp4" autoplay muted loop></video>
+            <img src="img/thumbnails/hooked_thumbnail.png" alt="Hooked" class="project-image">
             <div class="card-desc">
-              <div class="desc-heading">Personal Project</div>
-              <div class="desc-text">A casual game with core mechanics like casting, catching, inventory, and shopkeeping. Designed for satisfying loop-based gameplay and UI-driven interaction.</div>
+              <div class="desc-heading">WIP</div>
+              <div class="desc-text">
+                A casual fishing game with casting, catching, inventory, and shopkeeping. Designed for satisfying loop-based gameplay.
+              </div>
             </div>
           </div>
           <div class="card-title">Hooked</div>
+        </div>
+        <!-- Elixir Blitz -->
+  <div class="project-card" onclick="window.location.href='elixirblitz.html'">
+          <div class="card-logos">
+            <img src="img/ue_logo.png" alt="Unreal Engine" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
+          <div class="video-container">
+            <img src="img/thumbnails/elixirblitz_thumbnail.png" alt="Elixir Blitz" class="project-image">
+            <div class="card-desc">
+              <div class="desc-heading">WIP</div>
+              <div class="desc-text">
+                Play as a fairy potion-master. Gather ingredients, brew potions with speed and precision, and sell elixirs to unlock upgrades.
+              </div>
+            </div>
+          </div>
+          <div class="card-title">Elixir Blitz</div>
+        </div>
+        <!-- Rehab Reality -->
+  <div class="project-card" onclick="window.location.href='rehabreality.html'">
+          <div class="card-logos">
+            <img src="img/unity_logo.png" alt="Unity" class="card-logo-img">
+            <img src="img/meta_logo.png" alt="Meta" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
+          <div class="video-container">
+            <img src="img/thumbnails/rehabreality_thumbnail.png" alt="Rehab Reality" class="project-image">
+            <div class="card-desc">
+              <div class="desc-heading">WIP</div>
+              <div class="desc-text">
+                A Unity VR game for torso rehab. Turns prescribed movements into interactive challenges, tracking progress and boosting motivation.
+              </div>
+            </div>
+          </div>
+          <div class="card-title">Rehab Reality</div>
+        </div>
+        <!-- Finding Freeman -->
+  <div class="project-card" onclick="window.location.href='ff.html'">
+          <div class="card-logos">
+            <img src="img/unity_logo.png" alt="Unity" class="card-logo-img">
+            <img src="img/blender_logo.png" alt="Blender" class="card-logo-img">
+            <!-- Add more logos as needed -->
+          </div>
+          <div class="video-container">
+            <img src="img/thumbnails/ff_thumbnail.png" alt="Finding Freeman" class="project-image">
+            <div class="card-desc">
+              <div class="desc-heading">Game Jam</div>
+              <div class="desc-text">
+                LARP in the woods, find your missing friend, and use persuasion and breathing exercises to keep your party together and escape.
+              </div>
+            </div>
+          </div>
+          <div class="card-title">Finding Freeman</div>
         </div>
       </div>
     </section>
@@ -690,7 +843,7 @@
         <a href="mailto:vitteshraghavan@gmail.com">vitteshraghavan@gmail.com</a>
       </div>
     </section>
-
+<!-- 
     <section id="webgame">
       <h2>Play My Web Game</h2>
       <div class="game-center-wrapper">
@@ -702,7 +855,7 @@
         </div>
       </div>
     </section>
-  </main>
+  </main> -->
 
   <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
 

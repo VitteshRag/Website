@@ -76,13 +76,13 @@
       flex: 0 0 auto;
     }
     .logo-img {
-      width: 4.2rem;
-      height: 3rem;
+      width: 3.2rem;
+      height: 2.1rem;
       margin-right: 0.7rem;
     }
     .nav-logo-text {
-      font-weight: bold;
-      font-size: 2rem;
+      font-weight: 200;
+      font-size: 1.5rem;
       color: #fff;
       font-family: Arial, sans-serif;
       letter-spacing: 0.04em;
@@ -105,15 +105,17 @@
     }
     .nav-links a, .dropbtn {
       color: #fff;
-      font-size: 1.18rem;
-      font-weight: 700;
+      font-size: 1.20rem;
+      font-weight: 500;
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-      transition: color 0.2s;
-      text-transform: uppercase;
+      transition: color 0.32s cubic-bezier(.4,2,.6,1), transform 0.32s cubic-bezier(.4,2,.6,1);
+      text-transform: standard;
       letter-spacing: 0.04em;
     }
-    .nav-links a:hover, .dropbtn:hover {
-      color: #ffd700;
+    .nav-links .dropbtn:hover {
+      color: #5ed817;
+      transform: scale(1.12);      
+      transition: color 0.5s cubic-bezier(.4,2,.6,1), transform 0.5s cubic-bezier(.4,2,.6,1);
     }
 
     .dropdown {
@@ -210,12 +212,15 @@
     }
     .resume-link {
       font-size: 1.18rem;
-      padding: 0.7rem 1.3rem;
-      border: 2px solid #fff;
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif; /* match index.html font */
+      padding: 0.3rem 0.7rem;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.2s;
       white-space: nowrap;
       margin-left: 1rem;
+      background: none;
+      color: #fff;
     }
     .resume-link:hover {
       background: #fff;
@@ -252,12 +257,13 @@
 
     main { max-width: 1100px; margin: 2.5rem auto 2rem auto; padding: 0 1.5rem; }
     .showcase-section {
-      background: rgba(20,20,20,0.82);
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-      padding: 2.5rem 2rem;
-      border: 1px solid rgba(255,255,255,0.22);
-      margin-bottom: 2rem;
+      background: rgba(90, 90, 90, 0.062); /* match index.html section background */
+      backdrop-filter: blur(20px);         /* match index.html section blur */
+      border-radius: 12px;                 /* match index.html section border-radius */
+      box-shadow: 0 0px 20px rgba(129, 129, 129, 0.205); /* match index.html section shadow */
+      padding: 1.5rem;
+      border: 0px solid rgba(255,255,255,0.3);
+      margin-bottom: 4rem;
     }
     .showcase-title {
       font-size: 2rem;
@@ -305,6 +311,12 @@
       color: #ccc;
       text-align: center;
     }
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: .875rem;
+      color: #ccc;
+    }
     @media (max-width: 900px) {
       main { padding: 0 0.5rem; }
       .showcase-section { padding: 1.5rem 0.7rem; }
@@ -332,29 +344,25 @@
         </div>
         <ul class="nav-links">
           <li class="dropdown">
-            <span class="dropbtn">PROJECTS</span>
+            <a class="dropbtn" href="index.html">PROJECTS <i class="fas fa-caret-down"></i></a>
             <div class="dropdown-content">
               <div class="dropdown-section">
-                <div class="dropdown-heading">Team Projects</div>
-                <a href="#">Conquering of the Royal Keep</a>
-                <a href="#">Finding Freeman</a>
-                <a href="#">Rehab Reality</a>
-              </div>
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Individual Projects</div>
-                <a href="#">Wordle 2.0</a>
-                <a href="project4.html">Hooked</a>
-              </div>
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Game Jams</div>
-                <a href="project3.html">UEFN Co-op</a>
-                <a href="project2.html">Losing It</a>
+                <span class="dropdown-heading">Published Projects</span>
+                <a href="crk.html">Conquering of The Royal Keep</a>
+                <a href="vordle.html">Vordle</a>
+                <span class="dropdown-heading">WIP</span>
+                <a href="hooked.html">Hooked</a>
+                <a href="elixirblitz.html">Elixir Blitz</a>
+                <a href="rehabreality.html">Rehab Reality</a>
+                <span class="dropdown-heading">Game Jams</span>
+                <a href="uefn.html">UEFN</a>
+                <a href="losingit.html">Losing It</a>
+                <a href="ff.html">Finding Freeman</a>
               </div>
             </div>
           </li>
-          <li><a href="showcase.html">SHOWCASE</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="#contact">CONTACT</a></li>
+          <li><a class="dropbtn" href="showcase.html">SHOWCASE</a></li>
+          <li><a class="dropbtn" href="about.html">ABOUT</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -438,6 +446,7 @@
       <div class="showcase-card-title" style="text-align:center;margin-bottom:2.2rem;">Second Large Image Title</div>
     </section>
   </main>
+  <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
   <script>
     // Page transition logic
     document.addEventListener('DOMContentLoaded', () => {

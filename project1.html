@@ -1,0 +1,1131 @@
+<!-- crk.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vittesh Raghavan – Game Designer</title>
+  <meta name="description" content="Portfolio of Vittesh Raghavan, a game designer specializing in narrative-driven experiences, level design, and systems design.">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; color: #fff; overflow-x: hidden; position: relative; background: #000; }
+    a { text-decoration: none; color: inherit; }
+
+    #bg-video { position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+
+    header {
+      background: rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100vw;
+      left: 0;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 0;
+      width: 100%;
+      margin: 0;
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      padding: 0.7rem 2.2rem; /* <-- Add left/right padding here */
+      position: relative;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 2rem;
+      color: #fff;
+      margin-right: 0;
+      text-align: left;
+      transition: opacity 0.3s;
+      flex: 0 0 auto;
+    }
+    .logo-img {
+      width: 3.2rem;
+      height: 2.1rem;
+      margin-right: 0.7rem;
+    }
+    .nav-logo-text {
+      font-weight: 200;
+      font-size: 1.5rem;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.04em;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    .nav-row { display: flex; justify-content: center; align-items: center; width: 100%; position: relative; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+      flex: 1 1 auto;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li {
+      position: relative;
+    }
+    .nav-links a, .dropbtn {
+      color: #fff;
+      font-size: 1.20rem;
+      font-weight: 500;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      transition: color 0.32s cubic-bezier(.4,2,.6,1), transform 0.32s cubic-bezier(.4,2,.6,1);
+      text-transform: standard;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links .dropbtn:hover {
+      color: #5ed817;
+      transform: scale(1.12);
+    }
+
+    .social-container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: static;
+      flex: 0 0 auto;
+    }
+    .social-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+    }
+    .social-links a {
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+    .social-links img, .social-links i {
+      width: 3.2rem;
+      height: 3.2rem;
+      font-size: 3.2rem;
+    }
+    .social-links a:hover {
+      transform: scale(1.25);
+    }
+    .resume-link {
+      font-size: 1.18rem;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.2s;
+      white-space: nowrap;
+      margin-left: 1rem;
+    }
+    .resume-link:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    main { max-width: 1400px; margin: 2rem auto; padding: 0 1rem; }
+    section {
+      margin-bottom: 4rem;
+      background: rgba(90, 90, 90, 0.062);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 0px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0px 50px rgba(129, 129, 129, 0.37);
+    }
+    section h2 { margin-bottom: 1rem; font-size: 1.5rem; border-left: 2px solid #fff; padding-left: .5rem; }
+    section p, section ul { margin-top: .5rem; }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 0px solid rgba(255,255,255,0.25);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(.25,.8,.25,1), box-shadow 0.25s;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: stretch;
+    }
+    .project-card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+      z-index: 2;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 257px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-image {
+      display: block;
+      margin: auto;
+      max-width: 150%;    /* Change this value to size images horizontally (e.g. 100%, 80%, 300px) */
+      max-height: 200%;   /* Change this value to size images vertically (e.g. 100%, 80%, 200px) */
+      object-fit: contain; /* Use 'cover' to crop, 'contain' to fit entire image */
+    }
+    .card-title {
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 1rem 0 1rem 0;
+      transition: opacity 0.2s;
+      z-index: 1;
+      position: static;
+      border-radius: 0 0 8px 8px;
+    }
+    .card-desc {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(20,20,20,0.92);
+      color: #fff;
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 2rem 1.5rem 1rem 1.5rem;
+      font-size: 1rem;
+      transition: opacity 0.25s;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .desc-heading {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      text-align: left;
+    }
+    .desc-text {
+      text-align: left;
+    }
+    .project-card:hover .card-desc {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .project-card:hover .card-title {
+      opacity: 0.2;
+    }
+    .project-card .card-content { display: none; }
+    .project-card h3 { margin-bottom: .5rem; font-size: 1.25rem; color: #fff; }
+    .project-card p { color: #eee; }
+
+    footer { text-align: center; padding: 2rem 0; font-size: .875rem; color: #ccc; }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+    .skill-item {
+      background: rgba(20, 20, 20, 0.65); /* Darker and more visible */
+      border-radius: 10px;
+      padding: 1.0rem 0.3rem;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      min-width: 120px;
+      border: 0px solid rgba(255,255,255,0.13);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      user-select: none;
+      font-weight: 500;
+      text-align: center;
+    }
+    .skill-item i {
+      font-size: 1.4rem;
+      opacity: 0.85;
+    }
+    .skill-item span {
+      display: block;
+      text-align: center;
+    }
+
+    .contact-cards { display: none; }
+    .contact-email {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+      font-size: 1.1rem;
+      color: #fff;
+      justify-content: center;
+    }
+    .contact-email i {
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .contact-email a {
+      color: #fff;
+      font-size: 1.1rem;
+      word-break: break-all;
+      transition: color 0.2s;
+    }
+    .contact-email a:hover {
+      color: #ffd700;
+    }
+    @media (max-width: 700px) {
+      .skills-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      .skill-item {
+        min-width: unset;
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+    @media(max-width: 600px) {
+      .nav-links, .social-container { display: none; }
+      .project-video { height: 140px; }
+    }
+
+    /* Logo Animation Overlay Styles */
+    #logo-animation-overlay {
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s cubic-bezier(.4,2,.6,1), visibility 0.6s;
+      flex-direction: column;
+    }
+    #logo-anim-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      position: relative;
+    }
+    #logo-anim-img {
+      width: 120px;
+      height: 85px;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.4s, transform 0.4s cubic-bezier(.4,2,.6,1), margin-left 0.5s;
+      z-index: 2;
+    }
+    #logo-anim-text {
+      color: #fff;
+      font-size: 2.2rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.4s, transform 0.6s cubic-bezier(.4,2,.6,1);
+      z-index: 2;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+    }
+    #progress-bar-container {
+      width: 180px;
+      height: 6px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 3px;
+      margin: 2.2rem auto 0 auto;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffd700 0%, #fff 100%);
+      border-radius: 3px;
+      transition: width 0.3s cubic-bezier(.4,2,.6,1);
+    }
+    .logo-pop {
+      opacity: 1 !important;
+      transform: scale(1) !important;
+    }
+    .logo-nudge-left {
+      animation: logoNudgeLeft 0.7s forwards cubic-bezier(.4,2,.6,1);
+    }
+    .text-slide-right {
+      animation: textSlideRight 0.7s forwards cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes logoNudgeLeft {
+      from { transform: scale(1) translateX(0); }
+      to { transform: scale(1) translateX(-32px); }
+    }
+    @keyframes textSlideRight {
+      from { opacity: 0; transform: translateX(-60px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    #logo-animation-overlay.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.6s, visibility 0.6s;
+    }
+
+    /* Prevent background video from being interactive or focusable */
+    #bg-video {
+      pointer-events: none;
+      user-select: none;
+      touch-action: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+      display: inline-block; /* Ensures the dropdown area covers the button and the menu */
+    }
+
+    .dropdown .dropbtn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background: rgba(24,24,24,0.98);
+      min-width: 230px;
+      border-radius: 9px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+      padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 100;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+      display: flex;
+    }
+
+    .dropdown-section {
+      margin-bottom: 0.2rem;
+      padding-bottom: 0.2rem;
+    }
+
+    .dropdown-heading {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.08rem;
+      background: rgba(40,40,40,0.92);
+      border-radius: 5px;
+      padding: 0.38rem 0.7rem 0.38rem 0.7rem;
+      margin-bottom: 0.18rem;
+      margin-top: 0.1rem;
+      letter-spacing: 0.01em;
+      display: block;
+    }
+
+    .dropdown-section a {
+      display: block;
+      color: #fff;
+      padding: 0.32rem 0.7rem 0.32rem 1.2rem;
+      text-decoration: none;
+      font-size: 0.98rem;
+      border-radius: 3px;
+      background: none;
+      font-weight: 400;
+      transition: background 0.14s, color 0.14s;
+      margin-bottom: 0.04rem;
+    }
+
+    .dropdown-section a:hover {
+      background: #181818;
+      color: #ffd700;
+    }
+
+    /* Hide logo text on scroll */
+    @media (min-width: 700px) {
+      .nav-logo-text.hide-on-scroll {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .nav-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.7rem 1rem;
+      }
+      .nav-links {
+        gap: 1.2rem;
+      }
+      .social-container {
+        margin-top: 0.7rem;
+        justify-content: flex-end;
+      }
+    }
+
+    /* Page transition overlay styles */
+    #page-transition-overlay {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transition: opacity 0.5s cubic-bezier(.4,2,.6,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #page-transition-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #page-transition-spinner {
+      color: #ffd700;
+      font-size: 2.5rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .game-center-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 2rem;
+    }
+    .game-iframe-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #game-iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    #fullscreen-icon-btn {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      background: rgba(0, 0, 0, 0);
+      color: #979797;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      transition: background 0.2s, transform 0.2s;
+      z-index: 2;
+    }
+    #fullscreen-icon-btn:hover {
+      background: #97979700;
+      color: #979797;
+      transform: scale(1.12);
+    }
+
+    /* New styles for project card logos */
+    .card-logos {
+      position: absolute;
+      left: 50%;
+      top: 80%;
+      transform: translate(-50%, 0);
+      display: flex;
+      gap: 0.7rem;
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .card-logo-img {
+      width: 42px;
+      height: 42px;
+      opacity: 0.7;
+      transform: scale(0.7) translateY(40px);
+      transition: 
+        transform 0.5s cubic-bezier(.4,2,.6,1),
+        opacity 0.3s;
+      filter: drop-shadow(0 2px 8px #000);
+      will-change: transform, opacity;
+      object-fit: contain; /* Add this to preserve logo aspect ratio */
+      aspect-ratio: 1 / 1; /* Remove or adjust this if your logos are not square */
+      background: transparent;
+    }
+    .project-card:hover .card-logos {
+      opacity: 1;
+      z-index: 10;
+    }
+    .project-card:hover .card-logo-img {
+      opacity: 1;
+      transform: scale(1) translateY(-20px);
+    }
+    /* Tools box for project pages */
+    .tools-box {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.35rem;
+    }
+    .tool-item {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+        padding: 0.0rem 0.5rem;
+        border-radius: 10px;
+        font-size: 0.125rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    @media (max-width: 700px) {
+      .tools-box { justify-content: flex-start; }
+    }
+    /* Increase legibility for project detail text while keeping the main title size unchanged */
+    .project-details {
+      --pd-text-size: 1.25rem; /* base size for project details text */
+    }
+    .project-details h2 { font-size: 1.5rem; }
+    .project-details p,
+    .project-details ul,
+    .project-details .project-details-meta,
+    .project-details .project-details-link,
+    .project-details .project-details-team,
+    .project-details .project-details-role,
+    .project-details .tool-item,
+    .project-details .project-details-list li,
+    .project-details .project-details-summary,
+    .project-details .project-details-list {
+      font-size: var(--pd-text-size);
+      line-height: 1.4;
+    }
+    .project-details-summary {
+      font-size: 1.35rem;    /* Change this value as needed */
+      line-height: 1.8;
+      color: #dcdcdc;
+    }
+    .project-details-list,
+    .project-details-list li {
+      font-size: 1.25rem;    /* Change this value as needed */
+      line-height: 1.75;
+      color: #dcdcdc;
+    }
+    /* Ensure the project title keeps its explicit size if set inline */
+    .project-details .project-details-title { line-height: 1.05; }
+  </style>
+</head>
+<body>
+  <!-- Logo Animation Overlay -->
+  <div id="logo-animation-overlay">
+    <div id="logo-anim-center">
+      <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" id="logo-anim-img">
+      <span id="logo-anim-text">Vittesh Raghavan</span>
+    </div>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+  </div>
+
+  <video autoplay muted loop id="bg-video" tabindex="-1" aria-hidden="true">
+    <source src="video/animated_bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <header>
+    <nav>
+      <div class="nav-bar">
+        <div class="nav-logo" id="nav-logo-clickable" style="cursor:pointer;">
+          <img src="img/vrlogo.png" alt="Vittesh Raghavan Logo" class="logo-img">
+          <span class="nav-logo-text">Vittesh Raghavan</span>
+        </div>
+        <ul class="nav-links">
+          <li class="dropdown">
+            <a class="dropbtn" href="index.html">PROJECTS <i class="fas fa-caret-down"></i></a>
+            <div class="dropdown-content">
+              <div class="dropdown-section">
+                <span class="dropdown-heading">Published Projects</span>
+                <a href="crk.html">Conquering of The Royal Keep</a>
+                <a href="vordle.html">Vordle</a>
+                <span class="dropdown-heading">WIP</span>
+                <a href="hooked.html">Hooked</a>
+                <a href="elixirblitz.html">Elixir Blitz</a>
+                <a href="rehabreality.html">Rehab Reality</a>
+                <span class="dropdown-heading">Game Jams</span>
+                <a href="uefn.html">UEFN</a>
+                <a href="losingit.html">Losing It</a>
+                <a href="ff.html">Finding Freeman</a>
+              </div>
+            </div>
+          </li>
+          <li><a class="dropbtn" href="showcase.html">SHOWCASE</a></li>
+          <li><a class="dropbtn" href="about.html">ABOUT</a></li>
+        </ul>
+        <div class="social-container">
+          <ul class="social-links">
+            <li><a href="https://www.youtube.com/@vittesh9933" target="_blank" aria-label="YouTube"><img src="img/youtube.png" alt="YouTube"></a></li>
+            <li><a href="https://www.linkedin.com/in/vittesh-raghavan-546397225/" target="_blank" aria-label="LinkedIn"><img src="img/linkedin.png" alt="LinkedIn"></a></li>
+          </ul>
+          <a href="resume.pdf" target="_blank" class="resume-link">Resume</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Transition Overlay -->
+  <div id="page-transition-overlay">
+    <i id="page-transition-spinner" class="fas fa-spinner"></i>
+  </div>
+
+  <main>
+    <!-- Single project detail page (minimal, matches index.html header/aesthetics) -->
+    <section
+      class="project-details"
+      style="
+        max-width: 2100px;
+        margin: 4rem auto;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.25);
+        border-radius: 32px;
+        box-shadow: 0 8px 32px rgba(129, 129, 129, 0.37);
+      "
+    >
+
+      <!-- First Main Box: Image + Details -->
+      <div
+        class="project-top"
+        style="
+          display: flex;
+          gap: 1.6rem;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          margin-bottom: 2.2rem;
+        "
+      >
+        <!-- Glow effect wrapper -->
+        <div style="position: relative; width: 560px; max-width: 100%;">
+          <!-- Glow image (blurred, behind main image) -->
+          <img
+            src="img/thumbnails/crk_thumbnail.png"
+            alt=""
+            aria-hidden="true"
+            style="
+              position: absolute;
+              top: 0; left: 0; width: 100%; height: 100%;
+              filter: blur(32px);
+              opacity: 0.55;
+              z-index: 0;
+              pointer-events: none;
+              border-radius: 32px;
+            "
+          >
+          <!-- Main image -->
+          <img
+            src="img/thumbnails/crk_thumbnail.png"
+            alt="Conquering of The Royal Keep Thumbnail"
+            class="project-details-thumb"
+            style="
+              position: relative;
+              width: 560px;
+              max-width: 100%;
+              height: auto;
+              border-radius: 20px;
+              box-shadow: 0 0px 10px rgba(129, 129, 129, 0.185);
+              object-fit: cover;
+              z-index: 1;
+            "
+          >
+        </div>
+
+        <!-- Details box with background for readability -->
+        <div
+          class="project-meta"
+          style="
+            flex: 1; 
+            min-width: 260px; 
+            color: #fff;
+            background: rgba(24,24,24,0.85);
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+            padding: 1rem 2rem;
+          "
+        >
+          <h1
+            class="project-details-title"
+            style="margin: 0 0 0.4rem 0; font-size: 2.1rem; letter-spacing: 0.02em;"
+          >
+            Conquering of The Royal Keep
+          </h1>
+
+          <div
+            class="project-details-meta"
+            style="margin-bottom: 0.6rem; color: #d7d7d7;"
+          >
+          <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: #b3b3b3;"
+              >
+                Black Banshee Studios
+              </a>
+            <div class="project-details-link" style="margin-bottom: 1.5rem;">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: #07cf00; text-decoration: underline;"
+              >
+                Play / Download
+              </a>
+            </div>
+            <!-- Two-column flex for symmetry -->
+            <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+              <!-- Labels column -->
+              <div style="display: flex; flex-direction: column; gap: 2.5rem; align-items: flex-end;">
+                <strong style="font-size:1.2rem;color:#fff;">Tools used</strong>
+                <strong style="font-size:1.2rem;color:#fff;">Team Size</strong>
+                <strong style="font-size:1.2rem;color:#fff;">My Role</strong>
+              </div>
+              <!-- Values column -->
+              <div style="display: flex; flex-direction: column; gap: 2.3rem;">
+                <div class="tools-box" style="margin-top:0;">
+                  <span class="tool-item">Ren'Py</span>
+                  <span class="tool-item">Unreal Engine</span>
+                  <span class="tool-item">Photoshop</span>
+                </div>
+                <div class="tools-box" style="margin-top:0;">
+                  <span class="tool-item">9</span>
+                </div>
+                <div class="tools-box" style="margin-top:0;">
+                  <span class="tool-item">Lead Programmer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Main Box: Summary + Contributions -->
+      <div
+        class="project-details-section"
+        style="
+          margin-top: 0;
+          color: #fff;
+          background: rgba(24,24,24,0.85);
+          border-radius: 18px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+          padding: 2rem 1.5rem;
+        "
+      >
+        <h2 style="margin: 0 0 0.6rem 0; font-size: 1.45rem;">Summary</h2>
+        <p
+          class="project-details-summary"
+          style="line-height: 1.7; color: #dcdcdc; margin: 0; font-size: 1.225rem;"
+        >
+          Conquering of the Royal Keep is a decision driven, visual novel game in which the player takes on the persona of a squire of the Royal Guard, entering their final stage of training to become a full knight. However, there is more to the Royal Keep that meets the eye. As the squire makes their way through the trials and tribulations set forth by their last task, it is soon noticed that something about this keep is wrong, and the squire must face their death time and time again until they can finally conquer the mysteries of the Royal Keep. 
+        </p>
+
+        <h2 style="margin: 2rem 0 0.6rem 0; font-size: 1.45rem;">Contributions &amp; Responsibilities</h2>
+        <ul
+          class="project-details-list"
+          style="margin: 0; padding-left: 1.2rem; color: #dcdcdc; font-size: 1.125rem; line-height: 1.6;"
+        >
+          <li>Scripted gameplay and dialogue systems in Python using Ren’Py engine.</li>
+          <li>Designed and Scripted navigation and puzzle mechanics.</li>
+          <li>Designed and Implemented interactive image buttons using Photoshop.</li>
+          <li>Conducted comprehensive QA testing, debugging, and performance optimization to deliver a polished final build.</li>
+        </ul>
+      </div>
+
+      <!-- CRK Trailer Video Section -->
+      <section style="margin: 3rem 0 0 0; display: flex; justify-content: center;">
+        <div style="width:100%; max-width:900px; border-radius:24px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.5); background:rgba(0,0,0,0.7);">
+          <video
+            id="crk-trailer"
+            width="100%"
+            height="auto"
+            style="display:block; width:100%; height:auto; border-radius:24px;"
+            poster="img/thumbnails/crk_thumbnail.png"
+            controls
+            preload="none"
+          >
+            <source src="video/crk_trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+    </section>
+  <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Always scroll to top on load (prevents landing in the middle after coming from a project page)
+      window.scrollTo(0, 0);
+
+      const overlay = document.getElementById('logo-animation-overlay');
+      const logoImg = document.getElementById('logo-anim-img');
+      const logoText = document.getElementById('logo-anim-text');
+      const progressBar = document.getElementById('progress-bar');
+      const progressBarContainer = document.getElementById('progress-bar-container');
+
+      // Hide progress bar initially
+      progressBarContainer.style.display = 'none';
+
+      // Animation duration (logo+text) in ms
+      const ANIMATION_DURATION = 1300;
+
+      // If coming from a project page, set visitedMain before leaving (see note below)
+      // Check if we should skip animation (set in sessionStorage)
+      if (sessionStorage.getItem('visitedMain')) {
+        overlay.style.display = 'none'; // Instantly hide overlay, no flash
+        logoImg.style.opacity = '1';
+        logoText.style.opacity = '1';
+        logoText.style.transform = 'translateX(0)';
+        return;
+      }
+
+      // Hide text initially
+      logoText.style.opacity = '0';
+      logoText.style.transform = 'translateX(-60px)';
+      logoImg.style.opacity = '0';
+
+      // Pop in logo only
+      setTimeout(() => {
+        logoImg.classList.add('logo-pop');
+      }, 100);
+
+      // Animate text sliding out from logo, and logo nudges left
+      setTimeout(() => {
+        logoText.style.opacity = '1';
+        logoText.classList.add('text-slide-right');
+        logoImg.classList.add('logo-nudge-left');
+      }, 900);
+
+      // --- Progress Bar Logic ---
+      // List of assets to wait for: all videos + Font Awesome CSS
+      const videos = Array.from(document.querySelectorAll('video'));
+      const fontAwesome = document.querySelector('link[href*="font-awesome"],link[href*="fontawesome"],link[href*="font-awesome"]') ||
+                          document.querySelector('link[href*="fontawesome"]');
+      let loaded = 0;
+      const total = videos.length + 1; // +1 for Font Awesome
+
+      function updateProgress() {
+        const percent = Math.round((loaded / total) * 100);
+        progressBar.style.width = percent + '%';
+      }
+
+      // Font Awesome CSS load
+      if (fontAwesome) {
+        if (fontAwesome.sheet) {
+          loaded++;
+          updateProgress();
+        } else {
+          fontAwesome.addEventListener('load', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          });
+          fontAwesome.addEventListener('error', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          });
+        }
+      } else {
+        // If not found, count as loaded
+        loaded++;
+        updateProgress();
+      }
+
+      // Video load events
+      videos.forEach(video => {
+        if (video.readyState >= 3) {
+          loaded++;
+          updateProgress();
+        } else {
+          video.addEventListener('loadeddata', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          }, { once: true });
+          video.addEventListener('error', () => {
+            loaded++;
+            updateProgress();
+            checkAllLoaded();
+          }, { once: true });
+        }
+      });
+
+      // In case all videos are already loaded
+      updateProgress();
+
+      let animationDone = false;
+      let assetsLoaded = false;
+
+      // After animation duration, check if assets are loaded
+      setTimeout(() => {
+        animationDone = true;
+        if (loaded >= total) {
+          hideOverlay();
+        } else {
+          // Show progress bar if not already loaded
+          progressBarContainer.style.display = 'block';
+        }
+      }, ANIMATION_DURATION);
+
+      function checkAllLoaded() {
+        if (loaded >= total) {
+          assetsLoaded = true;
+          if (animationDone) {
+            hideOverlay();
+          }
+        }
+      }
+
+      function hideOverlay() {
+        setTimeout(() => {
+          overlay.classList.add('hide');
+          sessionStorage.setItem('visitedMain', 'true');
+        }, 400); // Small delay for smoothness
+      }
+
+      checkAllLoaded();
+    });
+
+    // Make logo+text clickable to go to main page if not already there
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLogo = document.getElementById('nav-logo-clickable');
+      // Only add click if not on main page (index.html or /)
+      if (!window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && window.location.pathname !== '/portfolio/Website/') {
+        navLogo.addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      const logoText = document.querySelector('.nav-logo-text');
+      if (window.scrollY > 40) {
+        logoText.classList.add('hide-on-scroll');
+      } else {
+        logoText.classList.remove('hide-on-scroll');
+      }
+    });
+
+    // Page transition logic
+    document.addEventListener('DOMContentLoaded', () => {
+      // Intercept all internal links for transition
+      document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        // Only intercept local links (not external, not anchors, not mailto)
+        if (
+          href &&
+          !href.startsWith('http') &&
+          !href.startsWith('mailto:') &&
+          !href.startsWith('#') &&
+          !link.hasAttribute('target')
+        ) {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const overlay = document.getElementById('page-transition-overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 400); // Duration matches CSS transition
+          });
+        }
+      });
+
+      // Also intercept project cards if they use onclick navigation
+      document.querySelectorAll('.project-card[onclick]').forEach(card => {
+        card.addEventListener('click', function(e) {
+          const href = card.getAttribute('onclick').match(/'([^']+)'/);
+          if (href && href[1]) {
+            e.preventDefault();
+            const overlay = document.getElementById('page-transition-overlay');
+            overlay.classList.add('show');
+            setTimeout(() => {
+              window.location.href = href[1];
+            }, 400);
+          }
+        });
+      });
+    });
+
+    // Fullscreen button functionality
+    document.getElementById('fullscreen-icon-btn').addEventListener('click', function() {
+      const iframe = document.getElementById('game-iframe');
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.mozRequestFullScreen) { // Firefox
+        iframe.mozRequestFullScreen();
+      } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) { // IE/Edge
+        iframe.msRequestFullscreen();
+      }
+    });
+
+    // Autoplay CRK trailer when scrolled into view
+    document.addEventListener('DOMContentLoaded', function() {
+      var trailer = document.getElementById('crk-trailer');
+      if (trailer) {
+        var played = false;
+        var observer = new window.IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !played) {
+              trailer.play();
+              played = true;
+            }
+          });
+        }, { threshold: 0.5 });
+        observer.observe(trailer);
+      }
+    });
+  </script>
+</body>
+</html>

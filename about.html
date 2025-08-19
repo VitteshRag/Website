@@ -71,14 +71,14 @@
     }
 
     .logo-img {
-      width: 4.2rem;
-      height: 3rem;
+      width: 3.2rem;
+      height: 2.1rem;
       margin-right: 0.7rem;
     }
 
     .nav-logo-text {
-      font-weight: bold;
-      font-size: 2rem;
+      font-weight: 200;
+      font-size: 1.5rem;
       color: #fff;
       font-family: Arial, sans-serif;
       letter-spacing: 0.04em;
@@ -101,14 +101,18 @@
     .nav-links li { position: relative; }
     .nav-links a, .dropbtn {
       color: #fff;
-      font-size: 1.18rem;
-      font-weight: 700;
+      font-size: 1.20rem;
+      font-weight: 500;
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-      transition: color 0.2s;
-      text-transform: uppercase;
+      transition: color 0.32s cubic-bezier(.4,2,.6,1), transform 0.32s cubic-bezier(.4,2,.6,1);
+      text-transform: standard;
       letter-spacing: 0.04em;
     }
-    .nav-links a:hover, .dropbtn:hover { color: #ffd700; }
+    .nav-links .dropbtn:hover {
+      color: #5ed817;
+      transform: scale(1.12);      
+      transition: color 0.5s cubic-bezier(.4,2,.6,1), transform 0.5s cubic-bezier(.4,2,.6,1);
+    }
 
     .dropdown {
       position: relative;
@@ -204,10 +208,10 @@
     }
     .resume-link {
       font-size: 1.18rem;
-      padding: 0.7rem 1.3rem;
-      border: 2px solid #fff;
-      border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid #fff;
+      border-radius: 8px;
+      transition: background 0.3s, color 0.2s;
       white-space: nowrap;
       margin-left: 1rem;
     }
@@ -294,6 +298,12 @@
     .about-photo img:hover {
       transform: scale(1.07);
       box-shadow: 0 8px 48px rgba(0,0,0,0.55);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: .875rem;
+      color: #ccc;
     }
     @media (max-width: 900px) {
       .about-container {
@@ -497,29 +507,25 @@
         </div>
         <ul class="nav-links">
           <li class="dropdown">
-            <span class="dropbtn">PROJECTS</span>
+            <a class="dropbtn" href="index.html">PROJECTS <i class="fas fa-caret-down"></i></a>
             <div class="dropdown-content">
               <div class="dropdown-section">
-                <div class="dropdown-heading">Team Projects</div>
-                <a href="#">Conquering of the Royal Keep</a>
-                <a href="#">Finding Freeman</a>
-                <a href="#">Rehab Reality</a>
-              </div>
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Individual Projects</div>
-                <a href="#">Wordle 2.0</a>
-                <a href="project4.html">Hooked</a>
-              </div>
-              <div class="dropdown-section">
-                <div class="dropdown-heading">Game Jams</div>
-                <a href="project3.html">UEFN Co-op</a>
-                <a href="project2.html">Losing It</a>
+                <span class="dropdown-heading">Published Projects</span>
+                <a href="crk.html">Conquering of The Royal Keep</a>
+                <a href="vordle.html">Vordle</a>
+                <span class="dropdown-heading">WIP</span>
+                <a href="hooked.html">Hooked</a>
+                <a href="elixirblitz.html">Elixir Blitz</a>
+                <a href="rehabreality.html">Rehab Reality</a>
+                <span class="dropdown-heading">Game Jams</span>
+                <a href="uefn.html">UEFN</a>
+                <a href="losingit.html">Losing It</a>
+                <a href="ff.html">Finding Freeman</a>
               </div>
             </div>
           </li>
-          <li><a href="showcase.html">SHOWCASE</a></li>
-          <li><a href="about.html">ABOUT</a></li>
-          <li><a href="#contact">CONTACT</a></li>
+          <li><a class="dropbtn" href="showcase.html">SHOWCASE</a></li>
+          <li><a class="dropbtn" href="about.html">ABOUT</a></li>
         </ul>
         <div class="social-container">
           <ul class="social-links">
@@ -582,7 +588,31 @@
         </div>
       </div>
     </section>
+    <section>
+      <h2>Education</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2.5rem;">
+        <div style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
+          <h3 style="margin:0 0 0.5rem 0; font-size:1.18rem; color:#ffd700;">B.Tech in Computer Science Engineering</h3>
+          <div style="color:#dcdcdc; font-size:1.08rem;">
+            Specialization in Gaming Technology<br>
+            <span style="color:#b3b3b3;">SRM IST, Chennai, India</span><br>
+            <span style="color:#b3b3b3;">2020 - 2024</span><br>
+            <strong style="color:#fff;">GPA: 3.74</strong>
+          </div>
+        </div>
+        <div style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
+          <h3 style="margin:0 0 0.5rem 0; font-size:1.18rem; color:#ffd700;">Masters in Game Design</h3>
+          <div style="color:#dcdcdc; font-size:1.08rem;">
+            <span style="color:#b3b3b3;">Full Sail University</span><br>
+            <span style="color:#b3b3b3;">Winter Park, Florida</span><br>
+            <span style="color:#b3b3b3;">2024 - 2025</span><br>
+            <strong style="color:#fff;">GPA: 4.0 <span style="font-weight:400; color:#ccc;">(latest as of August 2025)</span></strong>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+  <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
   <script>
     // Page transition logic
     document.addEventListener('DOMContentLoaded', () => {
