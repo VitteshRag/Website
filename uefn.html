@@ -656,6 +656,15 @@
     }
     /* Ensure the project title keeps its explicit size if set inline */
     .project-details .project-details-title { line-height: 1.05; }
+    .research-section a {
+      color: #a8a8a8;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .research-section a:hover {
+      color: #ffd700;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -900,7 +909,52 @@
           </video>
         </div>
       </section>
+
+      <!-- Research Summary text box -->
+      <div
+        class="project-details-section research-section"
+        style=" /* <-- add research-section class here */
+          margin-top: 2.5rem;
+          color: #fff;
+          background: rgba(24,24,24,0.85);
+          border-radius: 18px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+          padding: 2rem 1.5rem;
+        "
+      >
+        <h2 style="margin: 0 0 0.6rem 0; font-size: 1.45rem;">Research Summary</h2>
+        <p
+          class="project-details-summary"
+          style="line-height: 1.7; color: #dcdcdc; margin: 0; font-size: 1.225rem;"
+        >
+          Hanguir et al. (2024) show that designers can tune constraints and parameters so different strategies become more optimal as game conditions and environments change, encouraging players to adapt rather than repeat the same tactic making gameplay feel repetitive. In our Unreal Fest submission, we applied this idea by creating mechanics that rewarded players using varied approaches to shifting environments (Hanguir et al., 2024; Team Grey, 2025). Different enemies are prone to different types of guns, and players are required to use different strategies and think out of the box in order to progress through the game (Team Grey, 2025). These design choices were informed by Hanguir et al. which led us to winning first place in the category for “Best Multiplayer Game” (Hanguir et al., 2024; Team Grey, 2025).
+        </p>
+
+        <h2 style="margin: 2rem 0 0.6rem 0; font-size: 1.45rem;">References</h2>
+        <ul
+          class="project-details-list"
+          style="margin: 0; padding-left: 1.2rem; color: #dcdcdc; font-size: 1.125rem; line-height: 1.6;"
+        >
+          <li>
+            Epic Games, Inc. (n.d.). Unreal engine logo [Logo].
+            <a href="https://www.unrealengine.com" target="_blank" rel="noopener noreferrer">https://www.unrealengine.com</a>
+          </li><li>
+            Full Sail University. (n.d.). Full sail university logo [Logo].
+            <a href="https://www.fullsail.edu" target="_blank" rel="noopener noreferrer">https://www.fullsail.edu</a>
+          </li>          
+          <li>
+            Hanguir, O., Ma, W., Han, J., & Ryan, C. T. (2024). Optimizing for strategy diversity in the design of video games. Mathematical Programming, 210
+            <a href="https://doi.org/10.1007/s10107-024-02126-8" target="_blank" rel="noopener noreferrer">https://doi.org/10.1007/s10107-024-02126-8</a>
+          </li>
+          </li><li>
+            Team Grey. (2025). Shared experience in an Alternate universe [Video game].
+          </li>  
+        </ul>
+      </div>
+
     </section>
+
+    
   <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
 
   <script>

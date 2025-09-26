@@ -656,6 +656,16 @@
     }
     /* Ensure the project title keeps its explicit size if set inline */
     .project-details .project-details-title { line-height: 1.05; }
+    /* Reference link hover effect for research section */
+    .research-section a {
+      color: #a8a8a8;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .research-section a:hover {
+      color: #ffd700;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -909,6 +919,43 @@
           </video>
         </div>
       </section>
+      
+      <!-- Research Summary text box -->
+      <div
+        class="project-details-section research-section"
+        style="
+          margin-top: 2.5rem; /* increased margin for spacing from trailer */
+          color: #fff;
+          background: rgba(24,24,24,0.85);
+          border-radius: 18px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+          padding: 2rem 1.5rem;
+        "
+      >
+        <h2 style="margin: 0 0 0.6rem 0; font-size: 1.45rem;">Research Summary</h2>
+        <p
+          class="project-details-summary"
+          style="line-height: 1.7; color: #dcdcdc; margin: 0; font-size: 1.225rem;"
+        >
+          When developing Conquering of the Royal Keep, my process was shaped by rapid prototyping guidelines from Taylor’s (2022) GDC talk, <i>How to Create Rapid Prototypes</i>, including shortening design loops and exposing critical problems early in the development stage (Black Banshee Studios, n.d.).  I used these tactics when developing prototypes of time-based puzzles, levels, and various game mechanics (Black Banshee Studios, n.d.; Taylor, 2022). Following those guidelines streamlined my workflow for this project (Black Banshee Studios, n.d.; Taylor, 2022).
+        </p>
+
+        <h2 style="margin: 2rem 0 0.6rem 0; font-size: 1.45rem;">References</h2>
+        <ul
+          class="project-details-list"
+          style="margin: 0; padding-left: 1.2rem; color: #dcdcdc; font-size: 1.125rem; line-height: 1.6;"
+        >
+          <li>
+            Taylor, B. (2022). How to create rapid prototypes [Video]. Game Developers Conference.
+            <a href="https://gdcvault.com/play/1028097/Game-Career-Seminar-How-to" target="_blank" rel="noopener noreferrer">https://gdcvault.com/play/1028097/Game-Career-Seminar-How-to</a>
+          </li>
+          <li>
+            Black Banshee Studios. (2025). Conquering of the Royal Keep [Video game]. Black Banshee Studios.
+            <a href="https://www.blackbansheestudios.com/" target="_blank" rel="noopener noreferrer">https://www.blackbansheestudios.com/</a>
+          </li>
+        </ul>
+      </div>
+
     </section>
   <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
 

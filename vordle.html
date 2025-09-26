@@ -683,6 +683,15 @@
         right: 1rem;
       }
     }
+    .research-section a {
+      color: #a8a8a8;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .research-section a:hover {
+      color: #ffd700;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -934,6 +943,43 @@
           </button>
         </div>
       </section>
+
+      <!-- Research Summary text box -->
+      <div
+        class="project-details-section research-section"
+        style=" /* <-- add research-section class here */
+          margin-top: 2.5rem;
+          margin-top: 0;
+          color: #fff;
+          background: rgba(24,24,24,0.85);
+          border-radius: 18px;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+          padding: 2rem 1.5rem;
+        "
+      >
+        <h2 style="margin: 0 0 0.6rem 0; font-size: 1.45rem;">Research Summary</h2>
+        <p
+          class="project-details-summary"
+          style="line-height: 1.7; color: #dcdcdc; margin: 0; font-size: 1.225rem;"
+        >
+          When developing Conquering of the Royal Keep, my process was shaped by rapid prototyping guidelines from Taylor’s (2022) GDC talk, <i>How to Create Rapid Prototypes</i>, including shortening design loops and exposing critical problems early in the development stage (Black Banshee Studios, n.d.).  I used these tactics when developing prototypes of time-based puzzles, levels, and various game mechanics (Black Banshee Studios, n.d.; Taylor, 2022). Following those guidelines streamlined my workflow for this project (Black Banshee Studios, n.d.; Taylor, 2022).
+        </p>
+
+        <h2 style="margin: 2rem 0 0.6rem 0; font-size: 1.45rem;">References</h2>
+        <ul
+          class="project-details-list"
+          style="margin: 0; padding-left: 1.2rem; color: #dcdcdc; font-size: 1.125rem; line-height: 1.6;"
+        >
+          <li>
+            Rouse III, R., Lantz, F., Todd, E., Dorias, O., & Patel, C. (2022). Rules of the game 2022: Specific techniques from discerning designers [Video]. Game Developers Conference.
+            <a href="https://www.gdcvault.com/play/1027886/Rules-of-the-Game-2022" target="_blank" rel="noopener noreferrer">https://www.gdcvault.com/play/1027886/Rules-of-the-Game-2022</a>
+          </li>
+          <li>
+            Wardle, J. (2021). Wordle [Web game] The New York Times Company.
+            <a href="https://www.nytimes.com/games/wordle/index.html" target="_blank" rel="noopener noreferrer">https://www.nytimes.com/games/wordle/index.html</a>
+          </li>
+        </ul>
+      </div>
 
   </main>
 
