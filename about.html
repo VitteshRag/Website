@@ -487,6 +487,73 @@
       cursor: pointer;
       z-index: 10001;
     }
+
+    /* --- Education card: left text + right logo --- */
+    .edu-card {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      justify-content: space-between;
+    }
+    .edu-card .edu-info {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    /* Remove the "boxed" look around logos */
+    .edu-card .edu-logo {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 0;           /* remove inner padding */
+      border-left: none;        /* remove separator line */
+      background: transparent;  /* ensure no background behind logo */
+      height: auto;
+    }
+    .edu-card .edu-logo a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;               /* ensure anchor doesn't add box */
+      background: transparent;
+    }
+    .edu-card .edu-logo img {
+      width: auto;
+      max-height: 76px;         /* constrain height, preserve aspect ratio */
+      max-width: 100%;
+      height: auto;
+      border-radius: 0;         /* remove rounded box */
+      box-shadow: none;         /* remove shadow */
+      background: transparent;  /* no backing color */
+      display: block;
+    }
+
+    /* Increase SRM logo size specifically — adjust value as needed */
+    #srm-logo {
+      max-height: 110px; /* change this to increase/decrease SRM logo size */
+      width: auto;
+    }
+ 
+    /* ensure linked logos show pointer */
+    .edu-card .edu-logo a { display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+ 
+    /* Responsive: stack and move logo below on smaller screens */
+    @media (max-width: 900px) {
+      .edu-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .edu-card .edu-logo {
+        border-left: none;
+        padding-left: 0;
+        margin-top: 1rem;
+        justify-content: flex-end;
+      }
+      .edu-card .edu-logo img {
+        max-height: 64px;
+        width: auto;
+      }
+    }
   </style>
 </head>
 <body>
@@ -591,22 +658,37 @@
     <section>
       <h2>Education</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 2.5rem;">
-        <div style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
-          <h3 style="margin:0 0 0.5rem 0; font-size:1.18rem; color:#ffd700;">B.Tech in Computer Science Engineering</h3>
-          <div style="color:#dcdcdc; font-size:1.08rem;">
-            Specialization in Gaming Technology<br>
-            <span style="color:#b3b3b3;">SRM IST, Chennai, India</span><br>
-            <span style="color:#b3b3b3;">2020 - 2024</span><br>
-            <strong style="color:#fff;">GPA: 3.74</strong>
+        <div class="edu-card" style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
+          <div class="edu-info">
+            <h3 style="margin:0 0 0.5rem 0; font-size:1.18rem; color:#ffd700;">B.Tech in Computer Science Engineering</h3>
+            <div style="color:#dcdcdc; font-size:1.08rem;">
+              Specialization in Gaming Technology<br>
+              <span style="color:#b3b3b3;">SRM IST, Chennai, India</span><br>
+              <span style="color:#b3b3b3;">2020 - 2024</span><br>
+              <strong style="color:#fff;">GPA: 3.74</strong>
+            </div>
+          </div>
+          <div class="edu-logo">
+            <a href="https://www.srmist.edu.in" target="_blank" rel="noopener noreferrer" aria-label="SRM IST website">
+              <img id="srm-logo" src="img/SRM_logo.png" alt="SRM IST logo">
+            </a>
           </div>
         </div>
-        <div style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
-          <h3 style="margin:0 0 0.5rem 0; font-size:1.18rem; color:#ffd700;">Masters in Game Design</h3>
-          <div style="color:#dcdcdc; font-size:1.08rem;">
-            <span style="color:#b3b3b3;">Full Sail University</span><br>
-            <span style="color:#b3b3b3;">Winter Park, Florida</span><br>
-            <span style="color:#b3b3b3;">2024 - 2025</span><br>
-            <strong style="color:#fff;">GPA: 4.0 <span style="font-weight:400; color:#ccc;">(latest as of August 2025)</span></strong>
+
+        <div class="edu-card" style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
+          <div class="edu-info">
+            <h3 style="margin:0 0 0.5rem 0; font-size:1.18rem; color:#ffd700;">Masters in Game Design</h3>
+            <div style="color:#dcdcdc; font-size:1.08rem;">
+              <span style="color:#b3b3b3;">Full Sail University</span><br>
+              <span style="color:#b3b3b3;">Winter Park, Florida</span><br>
+              <span style="color:#b3b3b3;">2024 - 2025</span><br>
+              <strong style="color:#fff;">GPA: 4.0 <span style="font-weight:400; color:#ccc;"></span></strong>
+            </div>
+          </div>
+          <div class="edu-logo">
+            <a href="https://www.fullsail.edu" target="_blank" rel="noopener noreferrer" aria-label="Full Sail University website">
+              <img src="img/FullSail_logo.png" alt="Full Sail University logo">
+            </a>
           </div>
         </div>
       </div>
