@@ -122,6 +122,7 @@
       transform: scale(1.25);
     }
     .resume-link {
+      display: none;
       font-size: 1.18rem;
       padding: 0.3rem 0.7rem;
       border: 1px solid #fff;
@@ -666,6 +667,158 @@
       color: #ffd700;
       text-decoration: underline;
     }
+
+    /* Add / replace the refactor styles (merge into the <style> block) */
+.refactor-section {
+  margin-top: 2rem;
+  color: #fff;
+  background: rgba(24,24,24,0.95);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  padding: 1.5rem;
+}
+.refactor-section h2 { font-size: 1.45rem; margin: 0 0 0.6rem 0; }
+.refactor-section p { color: #dcdcdc; margin: 0 0 1rem 0; font-size: 1.125rem; line-height: 1.6; }
+
+.refactor-columns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+/* keep columns equal width */
+.refactor-column { flex: 1 1 50%; min-width: 320px; }
+
+/* code pane headings */
+.code-heading {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #9fd3ff;
+  margin: 0 0 0.5rem 0;
+  text-align: center;  /* center the heading */
+}
+
+/* wrapper to add tinted background per pane */
+.code-pane {
+  border-radius: 8px;
+  padding: 0.35rem;
+  /* stronger default border to give more presence when tints are applied */
+  border: 2px solid rgba(255,255,255,0.06);
+}
+/* light red and green tints with stronger border color and subtle glow */
+.code-pane.old {
+  background: rgba(255, 72, 72, 0.04);           /* slightly stronger red tint */
+  border: 2px solid rgba(255, 72, 72, 0.20);     /* thicker, visible red border */
+  box-shadow: 0 8px 24px rgba(255, 72, 72, 0.06); /* faint red glow */
+}
+
+.code-pane.new {
+  background: rgba(0, 200, 83, 0.04);            /* slightly stronger green tint */
+  border: 2px solid rgba(0, 200, 83, 0.20);      /* thicker, visible green border */
+  box-shadow: 0 8px 24px rgba(0, 200, 83, 0.06); /* faint green glow */
+}
+
+/* keep inner code box border subtle but consistent */
+.code-lines {
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* numbered lines list */
+.code-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: linenumber;
+  background: #0b1220;
+  border-radius: 6px;
+  overflow: auto;
+  max-height: 360px;
+  border: 1px solid rgba(255,255,255,0.03);
+  /* custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 150, 200, 0.5) transparent;
+}
+
+/* webkit scrollbar (Chrome, Safari, Edge) */
+.code-lines::-webkit-scrollbar {
+  width: 6px;
+}
+
+.code-lines::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-lines::-webkit-scrollbar-thumb {
+  background: rgba(100, 150, 200, 0.4);
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+.code-lines::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 150, 200, 0.7);
+}
+
+.code-lines li {
+  counter-increment: linenumber;
+  display: flex;
+  gap: 0.6rem;               /* reduced horizontal gap between gutter and code */
+  padding: 0.25rem 0.6rem;   /* reduced vertical + horizontal padding for tighter lines */
+  font-family: "Courier New", Consolas, "Liberation Mono", monospace;
+  font-size: 0.85rem;        /* reduced from 0.95rem */
+  line-height: 1.25;         /* reduced line-height for tighter vertical spacing */
+  white-space: pre;
+  color: #e6eef6;
+}
+/* gutter / line number */
+.code-lines li::before {
+  content: counter(linenumber);
+  display: inline-block;
+  width: 2.6rem;             /* slightly narrower gutter */
+  text-align: right;
+  color: #6a7681;
+  margin-right: 0.5rem;      /* reduced space to match gap reduction */
+  flex: 0 0 2.6rem;
+  user-select: none;
+}
+
+/* simple token colors (approx VS Code) */
+.code-lines .comment { color: #6a9955; }
+.code-lines .keyword { color: #569cd6; }
+.code-lines .string  { color: #d69d85; }
+.code-lines .number  { color: #b5cea8; }
+.code-lines .func    { color: #dcdcaa; }
+
+/* responsive: stack vertically on small widths */
+@media (max-width: 900px) {
+  .refactor-columns { flex-direction: column; gap: 0.6rem; }
+}
+/* Dialogue & QTE mechanics section styles */
+.dialogue-section {
+  margin-top: 2rem;
+  color: #fff;
+  background: rgba(24,24,24,0.92);
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  padding: 1.25rem;
+}
+.dialogue-section h2 { font-size: 1.45rem; margin: 0 0 0.6rem 0; }
+.dialogue-columns {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+.dialogue-left, .dialogue-right { flex: 1 1 50%; min-width: 300px; }
+.dialogue-code-heading { font-family: 'Inter', Arial, sans-serif; font-weight:600; font-size:1rem; color:#9fd3ff; margin:0 0 0.5rem 0; text-align:center; }
+.dialogue-code-pane { border-radius:8px; padding:0.35rem; border:2px solid rgba(255,255,255,0.06); background: rgba(11,18,32,0.85); }
+.dialogue-video-container { display:flex; align-items:center; justify-content:center; width:100%; }
+.dialogue-video-wrapper { width:100%; max-width:560px; aspect-ratio: 1 / 1; border-radius:12px; overflow:hidden; background: rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; }
+.dialogue-video-wrapper video { width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width: 900px) {
+  .dialogue-columns { flex-direction: column; gap: 0.6rem; }
+}
   </style>
 </head>
 <body>
@@ -860,6 +1013,7 @@
                   <span class="tool-item">Ren'Py</span>
                   <span class="tool-item">Unreal Engine</span>
                   <span class="tool-item">Photoshop</span>
+                  <span class="tool-item">Github</span>
                 </div>
                 <div class="tools-box" style="margin-top:0;">
                   <span class="tool-item">9</span>
@@ -904,25 +1058,240 @@
           <li>Conducted comprehensive QA testing, debugging, and performance optimization to deliver a polished final build.</li>
         </ul>
       </div>
-
+      <li></li>
       <!-- CRK Trailer Video Section -->
-      <section style="margin: 3rem 0 0 0; display: flex; justify-content: center;">
+      <section style="margin: 0 0 0 0; display: flex; justify-content: center;">
         <div style="width:100%; max-width:900px; border-radius:24px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.5); background:rgba(0,0,0,0.7);">
-          <video
-            id="crk-trailer"
-            width="100%"
-            height="auto"
-            style="display:block; width:100%; height:auto; border-radius:24px;"
-            poster="img/thumbnails/crk_thumbnail.png"
-            controls
-            preload="none"
-          >
-            <source src="video/crk_trailer.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+          <h1 style="text-align: center; margin-top: 0.5rem; margin-bottom: 0.5rem; font-size: 2rem;">Trailer</h1>
+          <div style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+            <iframe
+              id="crk-trailer"
+              width="100%"
+              height="100%"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 24px; border: none;"
+              src="https://www.youtube.com/embed/IOlUNdXcIKc"
+              title="CRK Trailer"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
         </div>
       </section>
       
+      <!-- Dialogue and QTE mechanics section -->
+      <div class="project-details-section dialogue-section">
+        <h2>Dialouge and QTE mechanics</h2>
+        <p style="color: #dcdcdc; margin: 0 0 1rem 0;"></p>
+
+        <div class="dialogue-columns">
+          <div class="dialogue-left">
+            <div class="dialogue-code-heading">Code</div>
+            <div class="dialogue-code-pane code-pane old" role="region" aria-label="Dialogue and QTE code sample">
+              <ol class="code-lines" aria-hidden="false">
+                <li><span class="keyword">init</span> offset = <span class="number">-5</span></li>
+                <li></li>
+                <li><span class="keyword">default</span> rotate_speed = <span class="number">1.4</span></li>
+                <li><span class="keyword">default</span> chest_unlocked = <span class="keyword">False</span></li>
+                <li><span class="keyword">default</span> current_rotation = <span class="number">0</span></li>
+                <li><span class="keyword">default</span> chest_unlock_tries = <span class="number">3</span></li>
+                <li><span class="keyword">default</span> randomno = renpy.random.randint(<span class="number">1</span>,<span class="number">360</span>)</li>
+                <li></li>
+                <li><span class="keyword">init</span> <span class="keyword">python</span>:</li>
+                <li>    <span class="keyword">def</span> <span class="func">update_rotation</span>(trans, st, at):</li>
+                <li>        current_rotation = (st * <span class="number">360</span> / rotate_speed)%<span class="number">360</span></li>
+                <li>        trans.rotate = current_rotation</li>
+                <li>        <span class="keyword">return</span> <span class="number">0</span></li>
+                <li></li>
+                <li>    <span class="keyword">def</span> <span class="func">safezone_check</span>(current, target, lowerlimit, upperlimit):</li>
+                <li>        diff = (current - target + <span class="number">180</span>) % <span class="number">360</span> - <span class="number">180</span></li>
+                <li>        <span class="keyword">return</span> -lowerlimit &lt; diff &lt; upperlimit</li>
+                <li></li>
+                <li>    <span class="keyword">def</span> <span class="func">check_slider</span>():</li>
+                <li>        <span class="keyword">if</span> safezone_check(current_rotation,randomno,<span class="number">20</span>,<span class="number">25</span>):</li>
+                <li>            renpy.store.chest_unlocked = <span class="keyword">True</span></li>
+                <li>            renpy.play(<span class="string">"sound_effects/sfx_Puzzle2_Success.mp3"</span>, channel=<span class="string">"sound"</span>)</li>
+                <li>            renpy.jump(<span class="string">"CtRK_lavatrapRoom_camera2"</span>)</li>
+                <li>        <span class="keyword">else</span>:</li>
+                <li>            renpy.store.chest_unlock_tries -= <span class="number">1</span></li>
+                <li></li>
+                <li>    <span class="keyword">def</span> <span class="func">reset_puzzle</span>():</li>
+                <li>        renpy.store.randomno = renpy.random.randint(<span class="number">1</span>,<span class="number">360</span>)</li>
+                <li>        renpy.store.rotate_speed = <span class="number">2</span></li>
+                <li>        renpy.store.chest_unlock_tries = <span class="number">3</span></li>
+                <li>        renpy.store.chest_unlocked = <span class="keyword">False</span></li>
+                <li></li>
+                <li><span class="keyword">screen</span> <span class="func">solve_puzzle</span>():</li>
+                <li>    modal <span class="keyword">True</span></li>
+                <li>    <span class="keyword">if</span> chest_unlocked:</li>
+                <li>        timer <span class="number">0.1</span> action [Hide(<span class="string">"solve_puzzle"</span>),Function(reset_puzzle)]</li>
+                <li>    <span class="keyword">elif</span> <span class="keyword">not</span> chest_unlocked <span class="keyword">and</span> chest_unlock_tries&gt;<span class="number">0</span>:</li>
+                <li>        frame:</li>
+                <li>            background <span class="string">"#FFFFFF"</span></li>
+                <li>            add safe_zone_image at rotate_random</li>
+                <li>            add slider_image at rotating</li>
+                <li>            key <span class="string">"mousedown_1"</span> action [Function(check_slider)]</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="dialogue-right">
+            <div class="dialogue-video-container">
+              <div class="dialogue-video-wrapper" role="region" aria-label="Dialogue and QTE demo video">
+                <video controls preload="metadata" poster="img/thumbnails/crkqte.png" style="display:block;" aria-hidden="false">
+                  <source src="video/CRKQTE.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Refactoring Code section -->
+      <div class="project-details-section refactor-section">
+        <h2>Refactoring Code</h2>
+        <p>This section talks about how I refactred the code to have a more modular and flexible structure</p>
+
+        <div class="refactor-columns">
+          <!-- Old Code column -->
+          <div class="refactor-column">
+            <div class="code-heading">Old Code</div>
+            <div class="code-pane old" role="region" aria-label="Old code sample">
+              <ol class="code-lines" aria-hidden="false">
+                <li><span class="keyword">screen</span> CtRK_sawtrapRoom_camera1_nav():</li>
+                <li>    modal True</li>
+                <li></li>
+                <li>    imagebutton auto <span class="string">"bg_general_moveback_%s"</span>:</li>
+                <li>        focus_mask True</li>
+                <li>        hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>        action [<span class="keyword">Jump</span> (<span class="string">"CtRK_torchRoom_camera5"</span>)]</li>
+                <li></li>
+                <li>    imagebutton auto <span class="string">"bg_sawtraproom_camera1_camera2wall_%s"</span>:</li>
+                <li>        focus_mask True</li>
+                <li>        hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>        hovered [<span class="keyword">Notify</span> (<span class="string">"Lever1"</span>)]</li>
+                <li>        action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera2"</span>)]</li>
+                <li></li>
+                <li>    imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway1_%s"</span>:</li>
+                <li>        focus_mask True</li>
+                <li>        hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>        hovered [<span class="keyword">Notify</span> (<span class="string">"Camera 8"</span>)]</li>
+                <li>        action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera8"</span>)]</li>
+                <li>    </li>
+                <li>    imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway2_%s"</span>:</li>
+                <li>        focus_mask True</li>
+                <li>        hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>        hovered [<span class="keyword">Notify</span> (<span class="string">"Camera 7"</span>)]</li>
+                <li>        action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera7"</span>)]</li>
+                <li></li>
+                <li>    imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway3_%s"</span>:</li>
+                <li>        focus_mask True</li>
+                <li>        hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>        hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 1"</span>)]</li>
+                <li>        action [<span class="keyword">Jump</span> (<span class="string">"camera3_hallway"</span>)]</li>
+                <li></li>
+                <li>    imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway4_%s"</span>:</li>
+                <li>        focus_mask True</li>
+                <li>        hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>        hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 2"</span>)]</li>
+                <li>        action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera4"</span>)]</li>
+                <li></li>
+                <li>    <span class="keyword">if</span> lever2_activated:</li>
+                <li>        imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway5_trapdeactivated_%s"</span>:</li>
+                <li>            focus_mask True</li>
+                <li>            hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>            hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 3"</span>)]</li>
+                <li>            action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera5"</span>)]</li>
+                <li>    </li>
+                <li>    <span class="keyword">else</span>:</li>
+                <li>        imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway5_trapactive_%s"</span>:</li>
+                <li>            focus_mask True</li>
+                <li>            hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>            hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 3"</span>)]</li>
+                <li>            action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera5"</span>)]</li>
+                <li></li>
+                <li>    <span class="keyword">if</span> lever3_activated <span class="keyword">and</span> lever5_activated:</li>
+                <li>        imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway6_trapdeactivated_leverdown_%s"</span>:</li>
+                <li>            focus_mask True</li>
+                <li>            hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>            hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 4"</span>)]</li>
+                <li>            action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera6"</span>)]</li>
+                <li></li>
+                <li>    <span class="keyword">elif</span> lever3_activated <span class="keyword">and</span> lever5_activated == False:</li>
+                <li>        imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway6_trapdeactivated_leverup_%s"</span>:</li>
+                <li>            focus_mask True</li>
+                <li>            hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>            hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 4"</span>)]</li>
+                <li>            action [<span class="keyword">Jump</span> (<span class="string">"CtRK_sawtrapRoom_camera6"</span>)]</li>
+                <li>    <span class="keyword">else</span>:</li>
+                <li>        imagebutton auto <span class="string">"bg_sawtraproom_camera1_hallway6_%s"</span>:</li>
+                <li>            focus_mask True</li>
+                <li>            hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>            hovered [<span class="keyword">Notify</span> (<span class="string">"Hallway 4"</span>)]</li>
+                <li>            action [<span class="keyword">Notify</span> (<span class="string">"That way is blocked..."</span>)]</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Refactored Code column -->
+          <div class="refactor-column">
+            <div class="code-heading">Refactored Code</div>
+            <div class="code-pane new" role="region" aria-label="Refactored code sample">
+              <ol class="code-lines">
+                <li><span class="comment">################################################# List of Actions</span></li>
+                <li></li>
+                <li><span class="keyword">default</span> spyroom_camera1_moveback_actions = [<span class="keyword">Jump</span>(<span class="string">"CtRK_spyRoom_camera2"</span>)]</li>
+                <li><span class="keyword">default</span> spyroom_camera1_bookshelf_actions = [<span class="keyword">Jump</span>(<span class="string">"spyRoom_camera1_bookshelf_script"</span>)]</li>
+                <li><span class="keyword">default</span> spyroom_camera1_chest_actions = [<span class="keyword">Jump</span>(<span class="string">"spyRoom_camera1_chest_script"</span>)]</li>
+                <li><span class="keyword">default</span> spyroom_camera1_rug_actions = [<span class="keyword">Jump</span>(<span class="string">"spyRoom_camera1_rug_script"</span>)]</li>
+                <li><span class="keyword">default</span> spyroom_camera1_box_actions = [<span class="keyword">Jump</span>(<span class="string">"spyRoom_camera1_box_script"</span>)]</li>
+                <li></li>
+                <li><span class="keyword">default</span> spyroom_camera2_moveback_actions = [<span class="keyword">Jump</span>(<span class="string">"CtRK_spyRoom_camera1"</span>)]</li>
+                <li><span class="keyword">default</span> spyroom_camera2_door_actions = [<span class="keyword">Jump</span>(<span class="string">"CtRK_lavatrapRoom_camera6"</span>)]</li>
+                <li></li>
+                <li><span class="comment">################################################# List of Image buttons</span></li>
+                <li></li>
+                <li><span class="keyword">default</span> spyroom_camera1_moveback = imageButtonRef(<span class="string">"bg_general_moveback"</span>, True, <span class="string">""</span>, spyroom_camera1_moveback_actions, True)</li>
+                <li><span class="keyword">default</span> spyroom_camera1_bookshelf = imageButtonRef(<span class="string">"bg_spyroom_camera1_bookshelf"</span>, True, <span class="string">""</span>, spyroom_camera1_bookshelf_actions, True)</li>
+                <li><span class="keyword">default</span> spyroom_camera1_chest = imageButtonRef(<span class="string">"bg_spyroom_camera1_chest"</span>, True, <span class="string">""</span>, spyroom_camera1_chest_actions, True)</li>
+                <li><span class="keyword">default</span> spyroom_camera1_rug = imageButtonRef(<span class="string">"bg_spyroom_camera1_rug"</span>, True, <span class="string">""</span>, spyroom_camera1_rug_actions, True)</li>
+                <li><span class="keyword">default</span> spyroom_camera1_box = imageButtonRef(<span class="string">"bg_spyroom_camera1_box"</span>, True, <span class="string">""</span>, spyroom_camera1_box_actions, True)</li>
+                <li></li>
+                <li><span class="keyword">default</span> spyroom_camera2_moveback = imageButtonRef(<span class="string">"bg_general_moveback"</span>, True, <span class="string">""</span>, spyroom_camera2_moveback_actions, True)</li>
+                <li><span class="keyword">default</span> spyroom_camera2_door = imageButtonRef(<span class="string">"bg_spyroom_camera2_door"</span>, True, <span class="string">""</span>, spyroom_camera2_door_actions, True)</li>
+                <li></li>
+                <li><span class="comment">################################################# List of Cameras</span></li>
+                <li></li>
+                <li><span class="keyword">default</span> spyroom_camera1 = room([ spyroom_camera1_box,</li>
+                <li>                                spyroom_camera1_rug,</li>
+                <li>                                spyroom_camera1_chest,</li>
+                <li>                                spyroom_camera1_bookshelf,</li>
+                <li>                                spyroom_camera1_moveback])</li>
+                <li><span class="keyword">default</span> spyroom_camera2 = room([ spyroom_camera2_door, spyroom_camera2_moveback])</li>
+                <li></li>
+                <li><span class="comment">#################################################</span></li>
+                <li></li>
+                <li><span class="keyword">screen</span> spyRoom_nav(RoomRef):</li>
+                <li>    modal True</li>
+                <li>    <span class="keyword">for</span> imageButton <span class="keyword">in</span> RoomRef.imageButtonRefs:</li>
+                <li>        <span class="keyword">if</span> imageButton.isActive:</li>
+                <li>            imagebutton auto imageButton.image + <span class="string">"_%s"</span>:</li>
+                <li>                hover_sound <span class="string">"sound_effects/sfx_SingleTapStone2.mp3"</span></li>
+                <li>                focus_mask imageButton.focus_mask</li>
+                <li>                <span class="keyword">if</span> imageButton.sound != <span class="string">""</span>:</li>
+                <li>                    activate_sound imageButton.sound</li>
+                <li>                action imageButton.actions</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 3.5rem; color: #dcdcdc; font-size: 1.125rem; line-height: 1.6; text-align: left;">
+          -
+        </p>
+      </div>
+
       <!-- Research Summary text box -->
       <div
         class="project-details-section research-section"
