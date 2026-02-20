@@ -556,6 +556,272 @@
       }
     }
   </style>
+  <style>
+    /* Vertical timeline styles — match edu-card visuals and sizing */
+    .timeline {
+      position: relative;
+      display: block;
+      color: #fff;
+      font-size: 1.04rem; /* slightly larger timeline text */
+    }
+    .timeline .timeline-card {
+      /* reuse edu-card sizing but center and cap width */
+      width: 100%;
+      max-width: 720px;
+      background: rgba(24,24,24,0.85);
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+      padding: 1.2rem 2rem;
+      margin: 0 auto 1.2rem auto;
+      border: 1px solid rgba(0,0,0,0.12);
+      /* CSS vars for positioning the central line */
+      --date-width: 260px;
+      --date-shift: 0;
+      --line-width: 44px;
+      position: relative;
+    }
+    /* Single-line layout with central vertical line and dots */
+    .timeline-list { position: relative; }
+    /* Table layout: three columns (date / dot / content) with no visible borders */
+    .timeline-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    .timeline-table td {
+      padding: 6px 8px;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+    .timeline-table .timeline-date { width: var(--date-width); text-align: right; padding-right: 12px; padding-top:6px; }
+    .timeline-table .timeline-dot-cell { width: var(--line-width); text-align: center; }
+    .timeline-table .timeline-dot-cell .tl-dot { margin: 6px auto 0; }
+    .timeline-table .timeline-content { text-align: left; padding-left: 12px; }
+    .timeline-row {
+      display: grid;
+      grid-template-columns: var(--date-width) var(--line-width) 1fr;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.35rem 0;
+      min-height: 48px;
+      transition: gap 200ms cubic-bezier(.2,.8,.2,1);
+    }
+    .timeline-date {
+      width: var(--date-width);
+      color: #d6d6d6;
+      font-weight: 600;
+      text-align: right;
+      flex: 0 0 var(--date-width);
+      transition: transform 200ms cubic-bezier(.2,.8,.2,1);
+      position: relative;
+      z-index: 3;
+      white-space: nowrap;
+      overflow: visible;
+      padding-right: 8px;
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .timeline-line {
+      position: relative;
+      width: var(--line-width);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 0 0 var(--line-width);
+      justify-self: center;
+      align-self: center;
+    }
+    /* continuous vertical line for the whole card */
+    /* divider row between timeline entries showing a horizontal line + duration */
+    .timeline-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.25rem 0;
+      color: #cfcfcf;
+      font-size: 0.96rem;
+    }
+    .timeline-divider .divider-content {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1 1 auto;
+    }
+    .timeline-divider .divider-line {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      flex: 1 1 auto;
+      border-radius: 2px;
+    }
+    .timeline-divider .duration {
+      color: #d6d6d6;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    /* disable the continuous line; we'll draw per-row connectors */
+    .timeline .timeline-card::before { display: none; }
+
+    /* connector segment between rows (used in table connector rows) */
+    .timeline-connector .connector-cell { text-align: center; }
+    .timeline-connector .connector {
+      width: 4px;
+      height: 28px;
+      background: rgba(255,215,0,0.20);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+    .tl-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      /* no solid circle background — we'll draw a soft shadow behind the logo */
+      background: transparent;
+      border: none;
+      overflow: visible;
+      transform: translateY(0);
+      transition: transform 160ms ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: center;
+      justify-self: center;
+    }
+    .tl-dot::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 56%;
+      height: 56%;
+      background: rgba(0,0,0,0.45);
+      filter: blur(8px);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Outline circle visible when NOT hovering; shrinks on hover to reveal logo */
+    .tl-dot::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,215,0,0.28);
+      background: transparent;
+      z-index: 1;
+      pointer-events: none;
+      transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease;
+      opacity: 1;
+    }
+    /* No global dot hover; scale/fill only when its row (div or table row) is hovered */
+    /* On hover, scale and reveal the company logo inside the dot */
+    .timeline-row:hover .tl-dot,
+    .timeline-row.active .tl-dot,
+    .timeline-tr:hover .tl-dot,
+    .timeline-tr.active .tl-dot { transform: none; }
+    /* push date left and content right on hover to avoid overlap */
+    .timeline-row:hover { gap: 2.8rem; }
+    .timeline-row:hover .timeline-date,
+    .timeline-row.active .timeline-date,
+    .timeline-tr:hover .timeline-date,
+    .timeline-tr.active .timeline-date { transform: translateX(-14px); }
+    .timeline-row:hover .timeline-content,
+    .timeline-row.active .timeline-content,
+    .timeline-tr:hover .timeline-content,
+    .timeline-tr.active .timeline-content { transform: translateX(14px); }
+    .tl-dot .tl-fill { display: none; }
+
+    /* logo shown in dot on hover (user will supply src later) */
+    .tl-dot .tl-logo { display: block; position: relative; z-index: 3; width: 8px; height: 8px; object-fit: contain; border-radius: 6px; opacity: 0; transform-origin: center center; transform: scale(1); transition: transform 220ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease; }
+    .timeline-row:hover .tl-dot .tl-logo,
+    .timeline-row.active .tl-dot .tl-logo,
+    .timeline-tr:hover .tl-dot .tl-logo,
+    .timeline-tr.active .tl-dot .tl-logo { opacity: 1; transform: scale(3); }
+    /* Individual logo sizing (overrides base .tl-logo) */
+    .tl-dot[data-role="EA Sports"] .tl-logo { width: 28px; height: 28px; }
+    .tl-dot[data-role="Black Banshee / Cellec"] .tl-logo { width: 50px; height: 50px; }
+    .tl-dot[data-role="BrainWaveS"] .tl-logo { width: 38px; height: 38px; }
+    .tl-dot[data-role="InGage"] .tl-logo { width: 38px; height: 38px; }
+    /* Hide the outline when its row is hovered */
+    .timeline-row:hover .tl-dot::after,
+    .timeline-row.active .tl-dot::after,
+    .timeline-tr:hover .tl-dot::after,
+    .timeline-tr.active .tl-dot::after { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    .tl-dot .tl-label { position: relative; z-index: 2; font-size: 0; }
+    .timeline-content {
+      flex: 1 1 auto;
+      color: #fff;
+      transition: transform 200ms cubic-bezier(.2,.8,.2,1);
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
+    .timeline-content .role { font-weight: 700; color: #ffd700; font-size: 1.02rem; display: inline-block; }
+    .timeline-content .company { font-weight: 600; color: #d6d6d6; font-size: 0.98rem; margin-left: 0; }
+    @media (max-width: 700px) {
+      .timeline .timeline-card { --date-width: 150px; --line-width: 36px; --date-shift: -24px; }
+      .timeline-date { width: var(--date-width); flex: 0 0 var(--date-width); font-size: 0.95rem; }
+      .timeline-line { width: var(--line-width); flex: 0 0 var(--line-width); }
+      .tl-dot { width: 6px; height: 6px; }
+      /* reduce hover scale on small screens */
+      .timeline-row:hover .tl-dot,
+      .timeline-row.active .tl-dot { transform: scale(3.2); }
+      .timeline-row:hover { gap: 1.6rem; }
+      .timeline-row:hover .timeline-date,
+      .timeline-row.active .timeline-date { transform: translateX(-8px); }
+      .timeline-row:hover .timeline-content,
+      .timeline-row.active .timeline-content { transform: translateX(8px); }
+    }
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-top: 0.2rem;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0.9rem 1rem;
+      background: transparent;
+      border-radius: 8px;
+      border: none;
+      box-shadow: none;
+      display: block;
+    }
+    .timeline-item .date {
+      color: #ffd700;
+      font-weight: 700;
+      margin-bottom: 0.18rem;
+      font-size: 1rem;
+    }
+    .timeline-item .title {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.06rem;
+      margin-bottom: 0.15rem;
+    }
+    .timeline-item .desc {
+      color: #d6d6d6;
+      font-size: 0.98rem;
+      line-height: 1.45;
+    }
+    @media (max-width: 700px) {
+      .timeline .timeline-card { padding: 0.95rem 1rem; }
+      .timeline-item { padding: 0.6rem 0; }
+    }
+  </style>
 </head>
 <body>
   <!-- Page Transition Overlay -->
@@ -657,6 +923,55 @@
       </div>
     </section>
     <section>
+      <h2>Timeline</h2>
+      <div style="display:flex; justify-content:center; gap:2.5rem;">
+        <div class="timeline timeline-card">
+            <table class="timeline-table" role="table" aria-label="Work timeline">
+              <tbody>
+                <tr class="timeline-tr">
+                  <td class="timeline-date">Feb 2026 - Present</td>
+                  <td class="timeline-dot-cell"><div class="tl-dot" data-role="EA Sports"><div class="tl-fill"></div><img class="tl-logo" src="img/easportslogo.png"></div></td>
+                  <td class="timeline-content"><div class="role">Associate Game Designer</div><div class="company">EA Sports</div></td>
+                </tr>
+                <tr class="timeline-connector">
+                  <td></td>
+                  <td class="connector-cell"><div class="connector"></div></td>
+                  <td></td>
+                </tr>
+                <tr class="timeline-spacer"><td colspan="3" style="height:8px"></td></tr>
+                <tr class="timeline-tr">
+                  <td class="timeline-date">Feb 2025 - Feb 2026</td>
+                  <td class="timeline-dot-cell"><div class="tl-dot" data-role="Black Banshee / Cellec"><div class="tl-fill"></div><img class="tl-logo" src="img/celleclogo.png" alt="Black Banshee / Cellec logo"></div></td>
+                  <td class="timeline-content"><div class="role">Technical Designer</div><div class="company">Black Banshee Studios / Cellec Studios</div></td>
+                </tr>
+                <tr class="timeline-connector">
+                  <td></td>
+                  <td class="connector-cell"><div class="connector"></div></td>
+                  <td></td>
+                </tr>
+                <tr class="timeline-spacer"><td colspan="3" style="height:8px"></td></tr>
+                <tr class="timeline-tr">
+                  <td class="timeline-date">Sept 2023 - Sept 2024</td>
+                  <td class="timeline-dot-cell"><div class="tl-dot" data-role="BrainWaveS"><div class="tl-fill"></div><img class="tl-logo" src="img/brainwaveslogo.png"></div></td>
+                  <td class="timeline-content"><div class="role">Designer & 3D Artist (Intern)</div><div class="company">BrainWaveS Neurorehab</div></td>
+                </tr>
+                <tr class="timeline-connector">
+                  <td></td>
+                  <td class="connector-cell"><div class="connector"></div></td>
+                  <td></td>
+                </tr>
+                <tr class="timeline-spacer"><td colspan="3" style="height:8px"></td></tr>
+                <tr class="timeline-tr">
+                  <td class="timeline-date">Oct 2022 - Nov 2022</td>
+                  <td class="timeline-dot-cell"><div class="tl-dot" data-role="InGage"><div class="tl-fill"></div><img class="tl-logo" src="img/ingagelogo.png"></div></td>
+                  <td class="timeline-content"><div class="role">AR/VR Instructor (Intern)</div><div class="company">InGage Technologies</div></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </section>
+    <section>
       <h2>Education</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 2.5rem;">
         <div class="edu-card" style="flex:1; min-width:260px; background:rgba(24,24,24,0.85); border-radius:12px; box-shadow:0 2px 16px rgba(0,0,0,0.18); padding:1.2rem 2rem; margin-bottom:1.2rem;">
@@ -695,6 +1010,7 @@
       </div>
     </section>
   </main>
+ 
   <footer>&copy; 2025 Vittesh Raghavan. All rights reserved.</footer>
   <script>
     // Page transition logic
@@ -736,6 +1052,30 @@
         });
       });
     });
+  </script>
+  <script>
+    // Simple per-row hover/touch handlers: fill only the hovered job's dot
+    (function(){
+      const rows = document.querySelectorAll('.timeline-row, .timeline-tr');
+      rows.forEach(row => {
+        const dot = row.querySelector('.tl-dot');
+        const fill = dot ? dot.querySelector('.tl-fill') : null;
+        function enter(){
+          row.classList.add('active');
+        }
+        function leave(){
+          row.classList.remove('active');
+        }
+        row.addEventListener('mouseenter', enter);
+        row.addEventListener('mouseleave', leave);
+        // touch: toggle on touchstart, remove on touchend or other touch
+        row.addEventListener('touchstart', function touchStartHandler(e){
+          row.classList.add('active');
+          function clear() { row.classList.remove('active'); document.removeEventListener('touchend', clear); }
+          document.addEventListener('touchend', clear, { once: true });
+        }, { passive: true });
+      });
+    })();
   </script>
   <script>
     // Make logo+text clickable to go to main page if not already there
